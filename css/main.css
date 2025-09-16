@@ -239,49 +239,64 @@ body {
 
 /* 大画面（1280px以上）で4カラム固定レイアウト */
 @media (min-width: 1280px) {
-    /* コンテナ幅を大幅拡張 - 横マージン最小化のため */
+    /* コンテナ幅は適度に保ち - 候補者グリッドは別途最適化 */
     .container {
-        max-width: 1900px;
+        max-width: 1400px;
     }
     
-    /* 候補者グリッドを4カラム固定に変更 */
+    /* 候補者グリッドを4カラム固定に変更 + 横幅最大活用 */
     .candidates-grid {
         grid-template-columns: repeat(4, 1fr);
         gap: 1.5rem;
-        margin: 3rem 0;
+        margin: 3rem -2rem;
+        padding: 0 2rem;
+        width: calc(100vw - 2rem);
+        max-width: none;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
 /* 超大画面（1440px以上）でさらに最適化 */
 @media (min-width: 1440px) {
     .container {
-        max-width: 2000px;
+        max-width: 1500px;
     }
     
     .candidates-grid {
         gap: 2rem;
+        margin: 3rem -3rem;
+        padding: 0 3rem;
+        width: calc(100vw - 4rem);
     }
 }
 
 /* 極大画面（1600px以上）でさらに最適化 */
 @media (min-width: 1600px) {
     .container {
-        max-width: 2200px;
+        max-width: 1600px;
     }
     
     .candidates-grid {
         gap: 2.5rem;
+        margin: 3rem -4rem;
+        padding: 0 4rem;
+        width: calc(100vw - 6rem);
     }
 }
 
-/* 超極大画面（1920px以上）で最大限拡張 */
+/* 超大画面（1920px以上）で適度なコンテナ幅保持 */
 @media (min-width: 1920px) {
     .container {
-        max-width: 2400px;
+        max-width: 1700px;
     }
     
     .candidates-grid {
         gap: 3rem;
+        margin: 3rem -5rem;
+        padding: 0 5rem;
+        width: calc(100vw - 8rem);
     }
 }
 
