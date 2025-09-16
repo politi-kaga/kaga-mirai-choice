@@ -248,13 +248,10 @@ body {
     .candidates-grid {
         grid-template-columns: repeat(4, 1fr);
         gap: 1.5rem;
-        margin: 3rem -2rem;
+        margin: 3rem calc(-50vw + 50%);
         padding: 0 2rem;
-        width: calc(100vw - 2rem);
+        width: 100vw;
         max-width: none;
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
     }
 }
 
@@ -266,9 +263,9 @@ body {
     
     .candidates-grid {
         gap: 2rem;
-        margin: 3rem -3rem;
+        margin: 3rem calc(-50vw + 50%);
         padding: 0 3rem;
-        width: calc(100vw - 4rem);
+        width: 100vw;
     }
 }
 
@@ -280,9 +277,9 @@ body {
     
     .candidates-grid {
         gap: 2.5rem;
-        margin: 3rem -4rem;
+        margin: 3rem calc(-50vw + 50%);
         padding: 0 4rem;
-        width: calc(100vw - 6rem);
+        width: 100vw;
     }
 }
 
@@ -294,9 +291,9 @@ body {
     
     .candidates-grid {
         gap: 3rem;
-        margin: 3rem -5rem;
+        margin: 3rem calc(-50vw + 50%);
         padding: 0 5rem;
-        width: calc(100vw - 8rem);
+        width: 100vw;
     }
 }
 
