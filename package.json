@@ -8,10 +8,17 @@
     "dev": "node generate-site.js && python3 -m http.server 8000 --directory dist",
     "clean": "rm -rf dist"
   },
-  "keywords": ["election", "kaga", "politics", "static-site"],
+  "keywords": [
+    "election",
+    "kaga",
+    "politics",
+    "static-site"
+  ],
   "author": "加賀みらいチョイス運営委員会",
   "license": "MIT",
   "dependencies": {
-    "fs-extra": "^11.1.1"
+    "fs-extra": "^11.1.1",
+    "kuroshiro": "^1.2.0",
+    "kuroshiro-analyzer-kuromoji": "^1.1.0"
   }
 }

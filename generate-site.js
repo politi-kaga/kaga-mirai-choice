@@ -2,6 +2,17 @@
 
 const fs = require('fs-extra');
 const path = require('path');
+// Kuroshiroのインポートを修正
+let Kuroshiro, KuromojiAnalyzer;
+try {
+  Kuroshiro = require('kuroshiro').default || require('kuroshiro');
+  KuromojiAnalyzer = require('kuroshiro-analyzer-kuromoji').default || require('kuroshiro-analyzer-kuromoji');
+} catch (error) {
+  console.warn('⚠️ Kuroshiro modules not available:', error.message);
+}
+
+// kuroshiroのグローバルインスタンス
+let kuroshiro = null;
 
 // 設定
 const config = {
@@ -20,7 +31,7 @@ const config = {
 };
 
 // ベースHTMLテンプレート関数
-function generateBaseHTML(title, description, canonicalUrl, content, isHomePage = false, pageSpecificCSS = '', pageSpecificJS = '') {
+function generateBaseHTML(title, description, canonicalUrl, content, isHomePage = false, pageSpecificCSS = '', pageSpecificJS = '', depth = 1) {
   const googleAnalyticsScript = `
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=${config.googleAnalyticsId}"></script>
@@ -35,6 +46,11 @@ function generateBaseHTML(title, description, canonicalUrl, content, isHomePage 
   const googleSiteVerificationMeta = isHomePage ? 
     `<meta name="google-site-verification" content="${config.googleSiteVerification}" />` : '';
 
+  // depth に基づいて相対パスを動的に生成
+  const basePath = '../'.repeat(depth);
+  const faviconPath = depth === 0 ? 'favicon.ico' : `${basePath}favicon.ico`;
+  const cssPath = depth === 0 ? 'css/main.css' : `${basePath}css/main.css`;
+
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -43,8 +59,8 @@ function generateBaseHTML(title, description, canonicalUrl, content, isHomePage 
     <title>${title}</title>
     <meta name="description" content="${description}">
     <meta name="keywords" content="加賀市,議会議員,選挙,2025年,候補者,政策,投票">
-    <link rel="icon" href="../favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" href="${faviconPath}" type="image/x-icon">
+    <link rel="stylesheet" href="${cssPath}">
     ${pageSpecificCSS}
     
     <!-- OGP設定 -->
@@ -75,14 +91,14 @@ function generateBaseHTML(title, description, canonicalUrl, content, isHomePage 
 <body>
     <header class="header">
         <nav class="nav">
-            <a href="../index.html" class="logo">
+            <a href="${basePath}index.html" class="logo">
                 <div class="logo-icon">🗳️</div>
                 加賀みらいチョイス
             </a>
             <div class="nav-links">
-                <a href="../index.html">ホーム</a>
-                <a href="../candidates/index.html">候補者一覧</a>
-                <a href="../comparison/index.html">政策比較</a>
+                <a href="${basePath}index.html">ホーム</a>
+                <a href="${basePath}candidates/index.html">候補者一覧</a>
+                <a href="${basePath}comparison/index.html">政策比較</a>
             </div>
         </nav>
     </header>
@@ -174,7 +190,10 @@ function generateHomeHTML() {
     '2025年加賀市議会議員選挙の候補者情報と政策比較サイト。あなたの一票で加賀市の未来を選択しよう。',
     'https://politi-kaga.github.io/kaga-mirai-choice/',
     content,
-    true  // isHomePage = true
+    true,  // isHomePage = true
+    '',    // pageSpecificCSS
+    '',    // pageSpecificJS
+    0      // depth = 0 (root level)
   );
 }
 
@@ -197,14 +216,15 @@ function generateCandidatesListHTML() {
     '2025年加賀市議会議員選挙の立候補者一覧。各候補者の詳細情報と政策をご覧いただけます。',
     'https://politi-kaga.github.io/kaga-mirai-choice/candidates/',
     content,
-    false,
-    '',
-    pageSpecificJS
+    false,     // isHomePage
+    '',        // pageSpecificCSS
+    pageSpecificJS,
+    1          // depth = 1 (candidates/ is 1 level deep)
   );
 }
 
 // 候補者個別ページ用HTMLテンプレート
-function generateCandidateDetailHTML(candidate, index) {
+function generateCandidateDetailHTML(candidate, index, slug) {
   // 候補者データから基本情報を取得
   const name = getCandidateValue(candidate, [
     '【00_基本情報】氏名',
@@ -347,8 +367,12 @@ function generateCandidateDetailHTML(candidate, index) {
   return generateBaseHTML(
     `${name} | 候補者詳細 - 加賀みらいチョイス`,
     `${name}（${party}）の詳細情報と政策。2025年加賀市議会議員選挙立候補者。`,
-    `https://politi-kaga.github.io/kaga-mirai-choice/candidates/${index}/`,
-    content
+    `https://politi-kaga.github.io/kaga-mirai-choice/candidates/${slug}/`,
+    content,
+    false,  // isHomePage
+    '',     // pageSpecificCSS
+    '',     // pageSpecificJS
+    2       // depth = 2 (candidates/slug/ is 2 levels deep)
   );
 }
 
@@ -380,9 +404,10 @@ function generateComparisonHTML() {
     '2025年加賀市議会議員選挙候補者の政策を分野別に比較。各候補者の考えや政策を詳しく比較検討できます。',
     'https://politi-kaga.github.io/kaga-mirai-choice/comparison/',
     content,
-    false,
-    '',
-    pageSpecificJS
+    false,     // isHomePage
+    '',        // pageSpecificCSS
+    pageSpecificJS,
+    1          // depth = 1 (comparison/ is 1 level deep)
   );
 }
 
@@ -503,6 +528,172 @@ function getPartyClass(party) {
   return 'party-independent';
 }
 
+// kuroshiroを初期化する関数
+async function initializeKuroshiro() {
+  if (kuroshiro) return kuroshiro;
+  
+  try {
+    if (!Kuroshiro || !KuromojiAnalyzer) {
+      console.warn('⚠️ Kuroshiro classes not available, using fallback slug generation');
+      return null;
+    }
+    
+    kuroshiro = new Kuroshiro();
+    const analyzer = new KuromojiAnalyzer();
+    await kuroshiro.init(analyzer);
+    console.log('📝 Kuroshiro initialized successfully');
+    return kuroshiro;
+  } catch (error) {
+    console.warn('⚠️ Kuroshiro initialization failed:', error.message);
+    return null;
+  }
+}
+
+// 日本語名をURLスラッグに変換する関数
+async function generateSlug(name, fallbackIndex = 0) {
+  if (!name || typeof name !== 'string') {
+    return `candidate-${fallbackIndex}`;
+  }
+
+  let slug = '';
+  
+  // kuroshiroが利用可能な場合はローマ字変換を試行
+  try {
+    if (kuroshiro) {
+      const romanji = await kuroshiro.convert(name, {
+        to: 'romaji',
+        mode: 'spaced'
+      });
+      slug = romanji
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '') // 英数字、スペース、ハイフン以外を削除
+        .replace(/\s+/g, '-')     // スペースをハイフンに置換
+        .replace(/-+/g, '-')      // 連続するハイフンを一つに
+        .trim()
+        .replace(/^-+|-+$/g, ''); // 先頭・末尾のハイフンを削除
+    }
+  } catch (error) {
+    console.warn(`⚠️ Romanization failed for "${name}":`, error.message);
+  }
+
+  // ローマ字変換に失敗した場合のフォールバック処理
+  if (!slug || slug.length < 2) {
+    // 手動でよくある日本語名をローマ字に変換
+    slug = convertNameToRomaji(name);
+  }
+
+  // それでもうまくいかない場合の最終フォールバック
+  if (!slug || slug.length < 2) {
+    slug = `candidate-${fallbackIndex}`;
+  } else {
+    // 重複を避けるため、インデックスも含める
+    slug = `${slug}-${fallbackIndex}`;
+  }
+
+  return slug;
+}
+
+// 日本語名を手動でローマ字に変換する関数（よくある名前のマッピング）
+function convertNameToRomaji(name) {
+  // よくある姓名のローマ字マッピング
+  const nameMapping = {
+    '田中': 'tanaka',
+    '佐藤': 'sato',
+    '鈴木': 'suzuki',
+    '山田': 'yamada',
+    '高橋': 'takahashi',
+    '渡辺': 'watanabe',
+    '中村': 'nakamura',
+    '小林': 'kobayashi',
+    '加藤': 'kato',
+    '吉田': 'yoshida',
+    '山本': 'yamamoto',
+    '太郎': 'taro',
+    '花子': 'hanako',
+    '次郎': 'jiro',
+    '一郎': 'ichiro',
+    '三郎': 'saburo',
+    '美智子': 'michiko',
+    '洋子': 'yoko',
+    '由美': 'yumi',
+    '健一': 'kenichi',
+    '浩': 'hiroshi',
+    '誠': 'makoto',
+    '学': 'manabu',
+    '明': 'akira',
+    '茂': 'shigeru',
+    '実': 'minoru',
+    '清': 'kiyoshi'
+  };
+
+  // 空白で分割して姓名を別々に処理
+  const parts = name.trim().replace(/\s+/g, ' ').split(' ');
+  const romajiParts = parts.map(part => {
+    // 完全一致チェック
+    if (nameMapping[part]) {
+      return nameMapping[part];
+    }
+    
+    // 部分一致チェック
+    for (const [kanji, romaji] of Object.entries(nameMapping)) {
+      if (part.includes(kanji)) {
+        return romaji;
+      }
+    }
+    
+    // マッピングが見つからない場合は元の文字を返す
+    return part;
+  });
+
+  return romajiParts
+    .join('-')
+    .toLowerCase()
+    .replace(/[^\w-]/g, '')
+    .replace(/-+/g, '-')
+    .trim();
+}
+
+// 候補者スラッグのマッピングを生成する関数
+async function generateCandidateSlugMapping(candidatesData) {
+  const slugMapping = [];
+  const usedSlugs = new Set();
+
+  for (let i = 0; i < candidatesData.length; i++) {
+    const candidate = candidatesData[i];
+    const name = getCandidateValue(candidate, [
+      '【00_基本情報】氏名',
+      '【00_基本情報】氏名（ふりがな）',
+      '【基本情報】氏名',
+      '【基本情報】氏名（ふりがな）',
+      '氏名（ふりがな）',
+      '氏名',
+      '名前'
+    ]) || `候補者${i + 1}`;
+
+    let baseSlug = await generateSlug(name, i);
+    let slug = baseSlug;
+    let counter = 1;
+
+    // 重複チェック
+    while (usedSlugs.has(slug)) {
+      slug = `${baseSlug}-${counter}`;
+      counter++;
+    }
+
+    usedSlugs.add(slug);
+    slugMapping.push({
+      index: i,
+      name: name,
+      slug: slug,
+      candidate: candidate
+    });
+
+    console.log(`🔗 候補者${i + 1}: "${name}" → slug: "${slug}"`);
+  }
+
+  return slugMapping;
+}
+
 // 候補者データの読み込み（モックデータまたはAPIから）
 async function loadCandidatesData() {
   try {
@@ -544,6 +735,9 @@ async function generateSite() {
   console.log('🚀 静的サイト生成を開始...');
   
   try {
+    // kuroshiroを初期化
+    await initializeKuroshiro();
+    
     // distディレクトリをクリーンアップ
     await fs.remove(config.distDir);
     await fs.ensureDir(config.distDir);
@@ -568,25 +762,39 @@ async function generateSite() {
     
     // candidates ディレクトリと候補者一覧ページを生成
     await fs.ensureDir(path.join(config.distDir, 'candidates'));
+    
+    // 候補者データを読み込み、スラッグマッピングを生成
+    const candidatesData = await loadCandidatesData();
+    const slugMapping = await generateCandidateSlugMapping(candidatesData);
+    
+    // スラッグマッピングをJSONとして保存（フロントエンド用）
+    const slugMappingForJS = slugMapping.map(item => ({
+      index: item.index,
+      name: item.name,
+      slug: item.slug
+    }));
+    await fs.writeFile(
+      path.join(config.distDir, 'js', 'slug-mapping.json'),
+      JSON.stringify(slugMappingForJS, null, 2)
+    );
+    console.log('🔗 スラッグマッピングファイルを生成しました');
+    
+    // 候補者一覧ページを生成（スラッグマッピング後）
     const candidatesListHtml = generateCandidatesListHTML();
     await fs.writeFile(path.join(config.distDir, 'candidates', 'index.html'), candidatesListHtml);
     console.log('👥 候補者一覧ページを生成しました');
     
-    // 候補者データを読み込んで個別ページを生成
-    const candidatesData = await loadCandidatesData();
-    
-    for (let i = 0; i < candidatesData.length; i++) {
-      const candidate = candidatesData[i];
-      
-      // 候補者個別ディレクトリを作成
-      const candidateDir = path.join(config.distDir, 'candidates', i.toString());
+    // 候補者個別ページを生成（スラッグベース）
+    for (const mapping of slugMapping) {
+      // 候補者個別ディレクトリを作成（スラッグベース）
+      const candidateDir = path.join(config.distDir, 'candidates', mapping.slug);
       await fs.ensureDir(candidateDir);
       
       // 候補者個別ページを生成
-      const candidateHtml = generateCandidateDetailHTML(candidate, i);
+      const candidateHtml = generateCandidateDetailHTML(mapping.candidate, mapping.index, mapping.slug);
       await fs.writeFile(path.join(candidateDir, 'index.html'), candidateHtml);
       
-      console.log(`👤 候補者${i + 1}の詳細ページを生成しました (/candidates/${i}/)`);
+      console.log(`👤 候補者${mapping.index + 1}の詳細ページを生成しました (/candidates/${mapping.slug}/)`);
     }
     
     // comparison ディレクトリと政策比較ページを生成

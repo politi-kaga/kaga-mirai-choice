@@ -89,6 +89,14 @@ body {
     flex-grow: 1;
 }
 
+/* PC版（1024px以上）でのコンテナ幅拡張 */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1400px;
+        padding: 0 2rem;
+    }
+}
+
 .hero {
     text-align: center;
     padding: 2rem 0;
@@ -221,6 +229,23 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 1rem;
     margin: 2rem 0;
+}
+
+/* PC版でのグリッドレイアウト最適化 */
+@media (min-width: 1024px) {
+    .candidates-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin: 3rem 0;
+    }
+}
+
+/* 大画面（1440px以上）でさらに最適化 */
+@media (min-width: 1440px) {
+    .candidates-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+    }
 }
 
 .candidate-card {
