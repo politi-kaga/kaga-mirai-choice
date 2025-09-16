@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         loadSlugMapping()
     ]).then(() => {
         updateCandidatesList();
+        updatePartyLists(); // 政党別リストも更新
     }).catch(error => {
         console.error('初期化エラー:', error);
         showError('データの読み込みに失敗しました。');
@@ -329,6 +330,103 @@ function createCandidateSlug(name, index) {
 function showError(message) {
     const candidatesGrid = document.querySelector('.candidates-grid');
     if (candidatesGrid) candidatesGrid.innerHTML = `<div class="loading">${message}</div>`;
+}
+
+// 政党別候補者リストを更新
+function updatePartyLists() {
+    const partyListsContainer = document.querySelector('.party-lists-container');
+    if (!partyListsContainer || candidatesData.length === 0) return;
+    
+    // 政党別に候補者をグループ化
+    const partiesMap = new Map();
+    
+    candidatesData.forEach((candidate, index) => {
+        const name = getCandidateValue(candidate, [
+            '【００_基本情報】氏名',
+            '【００_基本情報】氏名（ふりがな）',
+            '【基本情報】氏名',
+            '【基本情報】氏名（ふりがな）',
+            '氏名（ふりがな）',
+            '氏名',
+            '名前',
+            'name'
+        ]) || `候補者${index + 1}`;
+        
+        const party = getCandidateValue(candidate, [
+            '【００_基本情報】所属政党',
+            '【基本情報】所属政党',
+            '所属政党',
+            '政党',
+            'party'
+        ]) || '無所属';
+        
+        const age = getCandidateValue(candidate, [
+            '【００_基本情報】年齢',
+            '【基本情報】年齢',
+            '年齢',
+            'age'
+        ]) || '不明';
+        
+        // スラッグマッピングから対応するスラッグを取得
+        const mapping = slugMapping.find(m => m.index === index);
+        const slug = mapping ? mapping.slug : `${index}`;
+        const candidateDetailUrl = `${slug}/`;
+        
+        if (!partiesMap.has(party)) {
+            partiesMap.set(party, []);
+        }
+        
+        partiesMap.get(party).push({
+            name: name,
+            age: age,
+            url: candidateDetailUrl,
+            index: index
+        });
+    });
+    
+    // 政党をソート（無所属を最後に）
+    const sortedParties = Array.from(partiesMap.entries()).sort((a, b) => {
+        if (a[0] === '無所属') return 1;
+        if (b[0] === '無所属') return -1;
+        return a[0].localeCompare(b[0]);
+    });
+    
+    // HTML生成
+    let partyListsHtml = '';
+    
+    sortedParties.forEach(([partyName, members]) => {
+        const partyClass = getPartyClass(partyName);
+        
+        // メンバーを名前でソート
+        members.sort((a, b) => a.name.localeCompare(b.name));
+        
+        const membersListHtml = members.map(member => `
+            <li>
+                <span class="party-member-name">
+                    <a href="${member.url}" style="color: inherit; text-decoration: none;">
+                        ${member.name}
+                    </a>
+                </span>
+                <span class="party-member-info">${member.age}歳</span>
+            </li>
+        `).join('');
+        
+        partyListsHtml += `
+            <div class="party-group ${partyClass}">
+                <h3>
+                    ${partyName}
+                    <span class="party-member-count">${members.length}名</span>
+                </h3>
+                <ul class="party-members-list">
+                    ${membersListHtml}
+                </ul>
+            </div>
+        `;
+    });
+    
+    partyListsContainer.innerHTML = partyListsHtml;
+    
+    console.log(`🏤 政党別リストを生成完了: ${sortedParties.length}政党`);
 }
 
 // 候補者詳細ページ生成（MPAでは不要だが、データ準備のために残す）
