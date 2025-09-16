@@ -1,0 +1,17 @@
+{
+  "name": "kaga-mirai-choice",
+  "version": "1.0.0",
+  "description": "加賀市議会議員選挙2025 - 候補者情報サイト",
+  "main": "generate-site.js",
+  "scripts": {
+    "build": "node generate-site.js",
+    "dev": "node generate-site.js && python3 -m http.server 8000 --directory dist",
+    "clean": "rm -rf dist"
+  },
+  "keywords": ["election", "kaga", "politics", "static-site"],
+  "author": "加賀みらいチョイス運営委員会",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^11.1.1"
+  }
+}
