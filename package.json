@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node generate-site.js",
     "dev": "node generate-site.js && python3 -m http.server 8000 --directory dist",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "keywords": [
     "election",
@@ -20,5 +21,8 @@
     "fs-extra": "^11.1.1",
     "kuroshiro": "^1.2.0",
     "kuroshiro-analyzer-kuromoji": "^1.1.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
