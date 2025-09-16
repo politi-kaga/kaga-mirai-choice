@@ -100,6 +100,34 @@ body {
     background: linear-gradient(135deg, #f8fafc, #e2e8f0);
 }
 
+/* PC画面でheroセクションの幅を拡張 */
+@media (min-width: 1280px) {
+    .hero {
+        margin: 0 calc(-50vw + 50%);
+        width: 100vw;
+        padding: 3rem 2rem;
+    }
+}
+
+/* 大画面でheroセクションをさらに最適化 */
+@media (min-width: 1440px) {
+    .hero {
+        padding: 3.5rem 3rem;
+    }
+}
+
+@media (min-width: 1600px) {
+    .hero {
+        padding: 4rem 4rem;
+    }
+}
+
+@media (min-width: 1920px) {
+    .hero {
+        padding: 4.5rem 5rem;
+    }
+}
+
 .hero h1 {
     font-size: 2rem;
     color: #1e40af;
