@@ -30,17 +30,24 @@ async function loadCandidatesData() {
         // パフォーマンス測定開始
         const startTime = performance.now();
         
-        // CORSエラーを回避するシンプルなfetchを試行
+        // GitHub Pages環境でのCORSエラー対策
         let response;
+        
         try {
-            response = await fetch(API_URL);
-        } catch (corsError) {
-            console.warn('⚠️ Standard fetch failed, trying with minimal headers');
+            console.log('🌐 GitHub Pages環境でGAS APIにアクセス中...', API_URL);
             response = await fetch(API_URL, {
                 method: 'GET',
                 mode: 'cors',
-                credentials: 'omit'
+                cache: 'no-cache',
+                credentials: 'omit',
+                headers: {
+                    'Accept': 'application/json'
+                }
             });
+        } catch (corsError) {
+            console.warn('⚠️ Enhanced fetch failed, trying basic fetch', corsError.message);
+            // 基本的なfetchで再試行
+            response = await fetch(API_URL);
         }
         
         const fetchTime = performance.now() - startTime;
@@ -68,9 +75,23 @@ async function loadCandidatesData() {
         return candidatesData;
         
     } catch (error) {
-        console.error('API取得エラー:', error);
+        console.error('❌ API取得エラー詳細:', {
+            error: error.message,
+            stack: error.stack,
+            url: API_URL,
+            userAgent: navigator.userAgent,
+            origin: window.location.origin,
+            protocol: window.location.protocol
+        });
         hideLoadingState();
-        showError('データの取得に失敗しました。しばらく後に再度お試しください。');
+        
+        // GitHub Pages環境での詳細エラーメッセージ
+        const isGitHubPages = window.location.hostname.includes('github.io');
+        const errorMessage = isGitHubPages 
+            ? `GitHub Pages環境でのAPI取得エラー: ${error.message}. ブラウザのコンソールでエラー詳細を確認してください。`
+            : 'データの取得に失敗しました。しばらく後に再度お試しください。';
+        
+        showError(errorMessage);
         throw error;
     }
 }
