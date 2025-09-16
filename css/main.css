@@ -432,9 +432,16 @@ body {
     margin: 2rem 0;
 }
 
-/* 政策比較ページでは標準的なコンテナレイアウトを使用 */
+/* 政策比較ページでは80%幅のコンテナレイアウトを使用 */
 @media (min-width: 1280px) {
-    .comparison-section,
+    /* 政策比較セクションの幅も80%に設定 */
+    .comparison-section {
+        width: 80%;
+        max-width: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
     .category-scroll-container,
     .question-card {
         margin-left: auto;
@@ -450,6 +457,25 @@ body {
         max-width: none;
         transform: none;
         position: static;
+    }
+}
+
+/* 大画面でも政策比較の80%幅を維持 */
+@media (min-width: 1440px) {
+    .comparison-section {
+        width: 80%;
+    }
+}
+
+@media (min-width: 1600px) {
+    .comparison-section {
+        width: 80%;
+    }
+}
+
+@media (min-width: 1920px) {
+    .comparison-section {
+        width: 80%;
     }
 }
 
