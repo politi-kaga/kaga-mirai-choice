@@ -429,7 +429,8 @@ body {
 .party-kokumin { background: rgba(251, 190, 0, 0.1); color: #fbbe00; }
 
 .comparison-section {
-    margin: 2rem 0;
+    margin: 2rem auto;
+    width: 80%;
 }
 
 /* 政策比較ページでは80%幅のコンテナレイアウトを使用 */
