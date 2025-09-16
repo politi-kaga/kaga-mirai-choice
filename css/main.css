@@ -239,9 +239,9 @@ body {
 
 /* 大画面（1280px以上）で4カラム固定レイアウト */
 @media (min-width: 1280px) {
-    /* コンテナ幅を4カード対応に拡張 - より広いカード表示のため */
+    /* コンテナ幅を大幅拡張 - 横マージン最小化のため */
     .container {
-        max-width: 1600px;
+        max-width: 1900px;
     }
     
     /* 候補者グリッドを4カラム固定に変更 */
@@ -255,7 +255,7 @@ body {
 /* 超大画面（1440px以上）でさらに最適化 */
 @media (min-width: 1440px) {
     .container {
-        max-width: 1700px;
+        max-width: 2000px;
     }
     
     .candidates-grid {
@@ -266,11 +266,22 @@ body {
 /* 極大画面（1600px以上）でさらに最適化 */
 @media (min-width: 1600px) {
     .container {
-        max-width: 1800px;
+        max-width: 2200px;
     }
     
     .candidates-grid {
         gap: 2.5rem;
+    }
+}
+
+/* 超極大画面（1920px以上）で最大限拡張 */
+@media (min-width: 1920px) {
+    .container {
+        max-width: 2400px;
+    }
+    
+    .candidates-grid {
+        gap: 3rem;
     }
 }
 
