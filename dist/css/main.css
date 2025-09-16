@@ -100,6 +100,34 @@ body {
     background: linear-gradient(135deg, #f8fafc, #e2e8f0);
 }
 
+/* PC画面でheroセクションの幅を拡張 */
+@media (min-width: 1280px) {
+    .hero {
+        margin: 0 calc(-50vw + 50%);
+        width: 100vw;
+        padding: 3rem 2rem;
+    }
+}
+
+/* 大画面でheroセクションをさらに最適化 */
+@media (min-width: 1440px) {
+    .hero {
+        padding: 3.5rem 3rem;
+    }
+}
+
+@media (min-width: 1600px) {
+    .hero {
+        padding: 4rem 4rem;
+    }
+}
+
+@media (min-width: 1920px) {
+    .hero {
+        padding: 4.5rem 5rem;
+    }
+}
+
 .hero h1 {
     font-size: 2rem;
     color: #1e40af;
@@ -237,11 +265,63 @@ body {
     }
 }
 
-/* 大画面（1440px以上）でさらに最適化 */
-@media (min-width: 1440px) {
+/* 大画面（1280px以上）で4カラム固定レイアウト */
+@media (min-width: 1280px) {
+    /* コンテナ幅は適度に保ち - 候補者グリッドは別途最適化 */
+    .container {
+        max-width: 1400px;
+    }
+    
+    /* 候補者グリッドを4カラム固定に変更 + 横幅最大活用 */
     .candidates-grid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        margin: 3rem calc(-50vw + 50%);
+        padding: 0 2rem;
+        width: 100vw;
+        max-width: none;
+    }
+}
+
+/* 超大画面（1440px以上）でさらに最適化 */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1500px;
+    }
+    
+    .candidates-grid {
         gap: 2rem;
+        margin: 3rem calc(-50vw + 50%);
+        padding: 0 3rem;
+        width: 100vw;
+    }
+}
+
+/* 極大画面（1600px以上）でさらに最適化 */
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1600px;
+    }
+    
+    .candidates-grid {
+        gap: 2.5rem;
+        margin: 3rem calc(-50vw + 50%);
+        padding: 0 4rem;
+        width: 100vw;
+    }
+}
+
+/* 超大画面（1920px以上）で適度なコンテナ幅保持 */
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1700px;
+    }
+    
+    .candidates-grid {
+        gap: 3rem;
+        margin: 3rem calc(-50vw + 50%);
+        padding: 0 5rem;
+        width: 100vw;
     }
 }
 
@@ -255,6 +335,13 @@ body {
     border: 2px solid transparent;
     text-decoration: none;
     color: inherit;
+}
+
+/* PC画面でのカード内パディング調整 */
+@media (min-width: 1280px) {
+    .candidate-card {
+        padding: 2rem;
+    }
 }
 
 .candidate-card:hover {
@@ -296,6 +383,24 @@ body {
     color: #1e40af;
 }
 
+/* PC画面での候補者情報表示最適化 */
+@media (min-width: 1280px) {
+    .candidate-photo {
+        width: 90px;
+        height: 90px;
+        margin: 0 auto 1.25rem;
+    }
+    
+    .candidate-name {
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .candidate-info {
+        font-size: 0.9rem;
+    }
+}
+
 .candidate-info {
     font-size: 0.85rem;
     color: #64748b;
@@ -324,7 +429,221 @@ body {
 .party-kokumin { background: rgba(251, 190, 0, 0.1); color: #fbbe00; }
 
 .comparison-section {
-    margin: 2rem 0;
+    margin: 2rem auto;
+    width: 80%;
+}
+
+/* 政党別候補者リストセクションのスタイル */
+.party-list-section {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.party-list-section h2 {
+    color: #1e40af;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.party-lists-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.party-group {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border-left: 4px solid #3b82f6;
+}
+
+.party-group h3 {
+    color: #1e40af;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.party-member-count {
+    background: #3b82f6;
+    color: white;
+    font-size: 0.8rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+.party-members-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.party-members-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.party-members-list li:last-child {
+    border-bottom: none;
+}
+
+.party-member-name {
+    font-weight: 500;
+    color: #1e293b;
+}
+
+.party-member-info {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+/* 政党別色分け */
+.party-group.party-ldp {
+    border-left-color: #e70112;
+}
+.party-group.party-ldp h3 {
+    color: #e70112;
+}
+.party-group.party-ldp .party-member-count {
+    background: #e70112;
+}
+
+.party-group.party-constitutional {
+    border-left-color: #024197;
+}
+.party-group.party-constitutional h3 {
+    color: #024197;
+}
+.party-group.party-constitutional .party-member-count {
+    background: #024197;
+}
+
+.party-group.party-komeito {
+    border-left-color: #f55881;
+}
+.party-group.party-komeito h3 {
+    color: #f55881;
+}
+.party-group.party-komeito .party-member-count {
+    background: #f55881;
+}
+
+.party-group.party-communist {
+    border-left-color: #4d78d4;
+}
+.party-group.party-communist h3 {
+    color: #4d78d4;
+}
+.party-group.party-communist .party-member-count {
+    background: #4d78d4;
+}
+
+.party-group.party-ishin {
+    border-left-color: #37c200;
+}
+.party-group.party-ishin h3 {
+    color: #37c200;
+}
+.party-group.party-ishin .party-member-count {
+    background: #37c200;
+}
+
+.party-group.party-kokumin {
+    border-left-color: #fbbe00;
+}
+.party-group.party-kokumin h3 {
+    color: #fbbe00;
+}
+.party-group.party-kokumin .party-member-count {
+    background: #fbbe00;
+    color: #333;
+}
+
+.party-group.party-independent {
+    border-left-color: #6b7280;
+}
+.party-group.party-independent h3 {
+    color: #6b7280;
+}
+.party-group.party-independent .party-member-count {
+    background: #6b7280;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .party-list-section {
+        margin: 2rem 0;
+        padding: 1.5rem;
+    }
+    
+    .party-lists-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .party-group {
+        padding: 1rem;
+    }
+}
+
+/* 政策比較ページでは80%幅のコンテナレイアウトを使用 */
+@media (min-width: 1280px) {
+    /* 政策比較セクションの幅も80%に設定 */
+    .comparison-section {
+        width: 80%;
+        max-width: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .category-scroll-container,
+    .question-card {
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
+        max-width: none;
+    }
+    
+    .category-tabs {
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
+        max-width: none;
+        transform: none;
+        position: static;
+    }
+}
+
+/* 大画面でも政策比較の80%幅を維持 */
+@media (min-width: 1440px) {
+    .comparison-section {
+        width: 80%;
+    }
+}
+
+@media (min-width: 1600px) {
+    .comparison-section {
+        width: 80%;
+    }
+}
+
+@media (min-width: 1920px) {
+    .comparison-section {
+        width: 80%;
+    }
 }
 
 .category-scroll-container {

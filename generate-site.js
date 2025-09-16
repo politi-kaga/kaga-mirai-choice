@@ -694,39 +694,68 @@ async function generateCandidateSlugMapping(candidatesData) {
   return slugMapping;
 }
 
-// 候補者データの読み込み（モックデータまたはAPIから）
+// 候補者データの読み込み（GAS APIから）
 async function loadCandidatesData() {
+  const API_URL = 'https://script.google.com/macros/s/AKfycbxYQFMMz-Xh2vIDrj6FznzbuunLbdK26_oWz32KM3YjOIgQ6cmDQNV1KzMIEElUp16K/exec';
+  
   try {
-    // モックデータを作成（実際のAPIデータがない場合）
+    console.log('🚀 GAS APIからデータを取得中...', new Date().toLocaleTimeString());
+    
+    // パフォーマンス測定開始
+    const startTime = performance.now();
+    
+    // Node.js環境での fetch（v18以降はビルトイン）
+    let response;
+    try {
+      response = await fetch(API_URL);
+    } catch (corsError) {
+      console.warn('⚠️ Standard fetch failed, trying with minimal headers');
+      response = await fetch(API_URL, {
+        method: 'GET',
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (compatible; Static Site Generator)'
+        }
+      });
+    }
+    
+    const fetchTime = performance.now() - startTime;
+    console.log(`📡 Fetch完了: ${fetchTime.toFixed(2)}ms`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const parseStartTime = performance.now();
+    const data = await response.json();
+    const parseTime = performance.now() - parseStartTime;
+    console.log(`🔄 JSON解析完了: ${parseTime.toFixed(2)}ms`);
+    
+    if (!Array.isArray(data) || data.length === 0) {
+      throw new Error('データが空または無効な形式です');
+    }
+    
+    console.log(`✅ ${data.length}件の候補者データを取得しました`);
+    
+    const totalTime = performance.now() - startTime;
+    console.log(`✅ 全体完了時間: ${totalTime.toFixed(2)}ms`);
+    
+    return data;
+    
+  } catch (error) {
+    console.error('❌ GAS API取得エラー:', error);
+    console.log('⚠️ フォールバック: モックデータを使用します');
+    
+    // フォールバック: 最小限のモックデータ
     return [
       {
-        '【00_基本情報】氏名': '田中太郎',
-        '【00_基本情報】年齢': '45',
-        '【00_基本情報】所属政党': '無所属',
-        '【00_基本情報】当選回数': '新人',
-        '【01_経済政策】地域経済活性化について': '地域の中小企業支援を強化し、若者の雇用創出に取り組みます。',
-        '【02_福祉政策】高齢者福祉について': '高齢者が安心して暮らせる地域づくりを推進します。'
-      },
-      {
-        '【00_基本情報】氏名': '佐藤花子',
-        '【00_基本情報】年齢': '52',
-        '【00_基本情報】所属政党': '自由民主党',
-        '【00_基本情報】当選回数': '2回',
-        '【01_経済政策】地域経済活性化について': '観光業の振興と農業の6次産業化を推進します。',
-        '【02_福祉政策】高齢者福祉について': '介護施設の充実と在宅介護支援の拡充を図ります。'
-      },
-      {
-        '【00_基本情報】氏名': '山田次郎',
-        '【00_基本情報】年齢': '39',
-        '【00_基本情報】所属政党': '立憲民主党',
-        '【00_基本情報】当選回数': '1回',
-        '【01_経済政策】地域経済活性化について': 'デジタル化推進による新産業創出を目指します。',
-        '【02_福祉政策】高齢者福祉について': '地域包括ケアシステムの構築を推進します。'
+        '【00_基本情報】氏名': 'API接続エラーのため表示できません',
+        '【00_基本情報】年齢': '不明',
+        '【00_基本情報】所属政党': '不明',
+        '【00_基本情報】当選回数': '不明',
+        '【01_経済政策】地域経済活性化について': 'APIからデータを取得できませんでした。',
+        '【02_福祉政策】高齢者福祉について': 'APIからデータを取得できませんでした。'
       }
     ];
-  } catch (error) {
-    console.error('候補者データの読み込みに失敗:', error);
-    return [];
   }
 }
 
