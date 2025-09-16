@@ -4,10 +4,19 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbxYQFMMz-Xh2vIDrj6Fznzb
 
 // グローバル変数
 let candidatesData = [];
+let slugMapping = [];
 
 // ページ読み込み時にAPIからデータを取得
 document.addEventListener('DOMContentLoaded', function() {
-    loadCandidatesData();
+    Promise.all([
+        loadCandidatesData(),
+        loadSlugMapping()
+    ]).then(() => {
+        updateCandidatesList();
+    }).catch(error => {
+        console.error('初期化エラー:', error);
+        showError('データの読み込みに失敗しました。');
+    });
 });
 
 // APIからデータを取得（高速化版）
@@ -53,16 +62,38 @@ async function loadCandidatesData() {
         candidatesData = data;
         console.log('取得したデータ:', candidatesData);
         
-        // データを処理して候補者一覧を更新
-        updateCandidatesList();
-        
         const totalTime = performance.now() - startTime;
         console.log(`✅ 全体完了時間: ${totalTime.toFixed(2)}ms`);
+        
+        return candidatesData;
         
     } catch (error) {
         console.error('API取得エラー:', error);
         hideLoadingState();
         showError('データの取得に失敗しました。しばらく後に再度お試しください。');
+        throw error;
+    }
+}
+
+// スラッグマッピングを読み込む関数
+async function loadSlugMapping() {
+    try {
+        const response = await fetch('../js/slug-mapping.json');
+        if (!response.ok) {
+            throw new Error(`スラッグマッピング読み込みエラー: ${response.status}`);
+        }
+        slugMapping = await response.json();
+        console.log('🔗 スラッグマッピングを読み込みました:', slugMapping);
+        return slugMapping;
+    } catch (error) {
+        console.warn('⚠️ スラッグマッピングの読み込みに失敗、フォールバック使用:', error);
+        // フォールバック: 従来の番号ベースのスラッグを生成
+        slugMapping = candidatesData.map((_, index) => ({
+            index: index,
+            name: `候補者${index + 1}`,
+            slug: `${index}`
+        }));
+        return slugMapping;
     }
 }
 
@@ -148,8 +179,12 @@ function updateCandidatesList() {
         // 政党に応じたクラス
         const partyClass = getPartyClass(party);
         
-        // 候補者詳細ページのURLを生成（generate-site.jsで生成されるパスに対応）
-        const candidateDetailUrl = `${index}/`;
+        // スラッグマッピングから対応するスラッグを取得
+        const mapping = slugMapping.find(m => m.index === index);
+        const slug = mapping ? mapping.slug : `${index}`;
+        
+        // 候補者詳細ページのURLを生成（スラッグベース）
+        const candidateDetailUrl = `${slug}/`;
         
         const candidateCard = document.createElement('a');
         candidateCard.className = 'candidate-card';
