@@ -20,7 +20,7 @@ const config = {
 };
 
 // ベースHTMLテンプレート関数
-function generateBaseHTML(title, description, canonicalUrl, content, isHomePage = false, pageSpecificCSS = '', pageSpecificJS = '') {
+function generateBaseHTML(title, description, canonicalUrl, content, isHomePage = false, pageSpecificCSS = '', pageSpecificJS = '', depth = 1) {
   const googleAnalyticsScript = `
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=${config.googleAnalyticsId}"></script>
@@ -35,6 +35,11 @@ function generateBaseHTML(title, description, canonicalUrl, content, isHomePage 
   const googleSiteVerificationMeta = isHomePage ? 
     `<meta name="google-site-verification" content="${config.googleSiteVerification}" />` : '';
 
+  // depth に基づいて相対パスを動的に生成
+  const basePath = '../'.repeat(depth);
+  const faviconPath = depth === 0 ? 'favicon.ico' : `${basePath}favicon.ico`;
+  const cssPath = depth === 0 ? 'css/main.css' : `${basePath}css/main.css`;
+
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -43,8 +48,8 @@ function generateBaseHTML(title, description, canonicalUrl, content, isHomePage 
     <title>${title}</title>
     <meta name="description" content="${description}">
     <meta name="keywords" content="加賀市,議会議員,選挙,2025年,候補者,政策,投票">
-    <link rel="icon" href="../favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" href="${faviconPath}" type="image/x-icon">
+    <link rel="stylesheet" href="${cssPath}">
     ${pageSpecificCSS}
     
     <!-- OGP設定 -->
@@ -75,14 +80,14 @@ function generateBaseHTML(title, description, canonicalUrl, content, isHomePage 
 <body>
     <header class="header">
         <nav class="nav">
-            <a href="../index.html" class="logo">
+            <a href="${basePath}index.html" class="logo">
                 <div class="logo-icon">🗳️</div>
                 加賀みらいチョイス
             </a>
             <div class="nav-links">
-                <a href="../index.html">ホーム</a>
-                <a href="../candidates/index.html">候補者一覧</a>
-                <a href="../comparison/index.html">政策比較</a>
+                <a href="${basePath}index.html">ホーム</a>
+                <a href="${basePath}candidates/index.html">候補者一覧</a>
+                <a href="${basePath}comparison/index.html">政策比較</a>
             </div>
         </nav>
     </header>
@@ -174,7 +179,10 @@ function generateHomeHTML() {
     '2025年加賀市議会議員選挙の候補者情報と政策比較サイト。あなたの一票で加賀市の未来を選択しよう。',
     'https://politi-kaga.github.io/kaga-mirai-choice/',
     content,
-    true  // isHomePage = true
+    true,  // isHomePage = true
+    '',    // pageSpecificCSS
+    '',    // pageSpecificJS
+    0      // depth = 0 (root level)
   );
 }
 
@@ -197,9 +205,10 @@ function generateCandidatesListHTML() {
     '2025年加賀市議会議員選挙の立候補者一覧。各候補者の詳細情報と政策をご覧いただけます。',
     'https://politi-kaga.github.io/kaga-mirai-choice/candidates/',
     content,
-    false,
-    '',
-    pageSpecificJS
+    false,     // isHomePage
+    '',        // pageSpecificCSS
+    pageSpecificJS,
+    1          // depth = 1 (candidates/ is 1 level deep)
   );
 }
 
@@ -348,7 +357,11 @@ function generateCandidateDetailHTML(candidate, index) {
     `${name} | 候補者詳細 - 加賀みらいチョイス`,
     `${name}（${party}）の詳細情報と政策。2025年加賀市議会議員選挙立候補者。`,
     `https://politi-kaga.github.io/kaga-mirai-choice/candidates/${index}/`,
-    content
+    content,
+    false,  // isHomePage
+    '',     // pageSpecificCSS
+    '',     // pageSpecificJS
+    2       // depth = 2 (candidates/0/ is 2 levels deep)
   );
 }
 
@@ -380,9 +393,10 @@ function generateComparisonHTML() {
     '2025年加賀市議会議員選挙候補者の政策を分野別に比較。各候補者の考えや政策を詳しく比較検討できます。',
     'https://politi-kaga.github.io/kaga-mirai-choice/comparison/',
     content,
-    false,
-    '',
-    pageSpecificJS
+    false,     // isHomePage
+    '',        // pageSpecificCSS
+    pageSpecificJS,
+    1          // depth = 1 (comparison/ is 1 level deep)
   );
 }
 
