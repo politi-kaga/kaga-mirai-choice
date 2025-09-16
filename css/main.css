@@ -239,9 +239,9 @@ body {
 
 /* 大画面（1280px以上）で4カラム固定レイアウト */
 @media (min-width: 1280px) {
-    /* コンテナ幅を4カード対応に拡張 */
+    /* コンテナ幅を4カード対応に拡張 - より広いカード表示のため */
     .container {
-        max-width: 1400px;
+        max-width: 1600px;
     }
     
     /* 候補者グリッドを4カラム固定に変更 */
@@ -255,11 +255,22 @@ body {
 /* 超大画面（1440px以上）でさらに最適化 */
 @media (min-width: 1440px) {
     .container {
-        max-width: 1500px;
+        max-width: 1700px;
     }
     
     .candidates-grid {
         gap: 2rem;
+    }
+}
+
+/* 極大画面（1600px以上）でさらに最適化 */
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1800px;
+    }
+    
+    .candidates-grid {
+        gap: 2.5rem;
     }
 }
 
@@ -273,6 +284,13 @@ body {
     border: 2px solid transparent;
     text-decoration: none;
     color: inherit;
+}
+
+/* PC画面でのカード内パディング調整 */
+@media (min-width: 1280px) {
+    .candidate-card {
+        padding: 2rem;
+    }
 }
 
 .candidate-card:hover {
@@ -312,6 +330,24 @@ body {
     text-align: center;
     margin-bottom: 0.5rem;
     color: #1e40af;
+}
+
+/* PC画面での候補者情報表示最適化 */
+@media (min-width: 1280px) {
+    .candidate-photo {
+        width: 90px;
+        height: 90px;
+        margin: 0 auto 1.25rem;
+    }
+    
+    .candidate-name {
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .candidate-info {
+        font-size: 0.9rem;
+    }
 }
 
 .candidate-info {
