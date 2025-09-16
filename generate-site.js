@@ -207,15 +207,7 @@ function generateCandidatesListHTML() {
 
         <div class="candidates-grid">
             <div class="loading">候補者情報を読み込み中...</div>
-        </div>
-
-        <!-- 政党別候補者リストセクション -->
-        <section class="party-list-section">
-            <h2>所属政党別 候補者一覧</h2>
-            <div class="party-lists-container">
-                <div class="loading">政党別リストを読み込み中...</div>
-            </div>
-        </section>`;
+        </div>`;
 
   const pageSpecificJS = `<script src="../js/candidates.js"></script>`;
 
