@@ -1,0 +1,184 @@
+[
+  {
+    "category": {
+      "id": 1,
+      "name": "経済・産業",
+      "color": "#FF6B6B"
+    },
+    "questions": [
+      {
+        "question": {
+          "id": 1,
+          "category_id": 1,
+          "question_text": "地域経済活性化に向けた具体的な施策をお聞かせください"
+        },
+        "answers": [
+          {
+            "candidate_name": "田中太郎",
+            "answer_text": "地域企業の支援を強化し、新たな産業の誘致を進めます。特に製造業とIT関連企業の誘致に力を入れ、雇用の創出を図ります。",
+            "photo_url": null
+          },
+          {
+            "candidate_name": "佐藤花子",
+            "answer_text": "観光業の振興により、地域経済の活性化を図ります。加賀温泉郷の魅力を国内外に発信し、観光客の誘致を進めます。",
+            "photo_url": null
+          },
+          {
+            "candidate_name": "山田次郎",
+            "answer_text": "農業の6次産業化を推進し、地域ブランドの確立を図ります。加賀野菜の生産拡大と販路開拓により、農業所得の向上を目指します。",
+            "photo_url": null
+          }
+        ]
+      },
+      {
+        "question": {
+          "id": 2,
+          "category_id": 1,
+          "question_text": "雇用創出・働き方改革についてのお考えをお聞かせください"
+        },
+        "answers": [
+          {
+            "candidate_name": "田中太郎",
+            "answer_text": "多様な働き方を支援し、雇用の安定化を図ります。テレワーク環境の整備や職業訓練の充実により、市民の就労機会を拡大します。",
+            "photo_url": null
+          },
+          {
+            "candidate_name": "佐藤花子",
+            "answer_text": "女性の社会進出を支援し、働きやすい環境を整備します。保育施設の充実や育児支援制度の拡充により、仕事と家庭の両立を支援します。",
+            "photo_url": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": {
+      "id": 2,
+      "name": "教育・子育て",
+      "color": "#4ECDC4"
+    },
+    "questions": [
+      {
+        "question": {
+          "id": 3,
+          "category_id": 2,
+          "question_text": "子育て支援の充実に向けた取り組みをお聞かせください"
+        },
+        "answers": [
+          {
+            "candidate_name": "佐藤花子",
+            "answer_text": "保育園の待機児童ゼロを目指し、保育士の処遇改善と保育施設の拡充を進めます。また、放課後児童クラブの充実も図ります。",
+            "photo_url": null
+          }
+        ]
+      },
+      {
+        "question": {
+          "id": 4,
+          "category_id": 2,
+          "question_text": "教育環境の改善についてのお考えをお聞かせください"
+        },
+        "answers": [
+          {
+            "candidate_name": "佐藤花子",
+            "answer_text": "学校施設の老朽化対策とICT環境の整備を進めます。また、少人数学級の実現により、きめ細かな教育を提供します。",
+            "photo_url": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": {
+      "id": 3,
+      "name": "健康・医療・福祉",
+      "color": "#45B7D1"
+    },
+    "questions": [
+      {
+        "question": {
+          "id": 5,
+          "category_id": 3,
+          "question_text": "高齢者福祉の充実に向けた施策をお聞かせください"
+        },
+        "answers": [
+          {
+            "candidate_name": "高橋美咲",
+            "answer_text": "在宅医療・介護サービスの充実を図り、高齢者が住み慣れた地域で安心して暮らせる環境を整備します。",
+            "photo_url": null
+          }
+        ]
+      },
+      {
+        "question": {
+          "id": 6,
+          "category_id": 3,
+          "question_text": "医療体制の強化についてのお考えをお聞かせください"
+        },
+        "answers": [
+          {
+            "candidate_name": "高橋美咲",
+            "answer_text": "地域医療連携の強化と救急医療体制の充実を進めます。また、医療従事者の確保と処遇改善にも取り組みます。",
+            "photo_url": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "category": {
+      "id": 4,
+      "name": "まちづくり・都市計画",
+      "color": "#96CEB4"
+    },
+    "questions": []
+  },
+  {
+    "category": {
+      "id": 5,
+      "name": "環境・エネルギー",
+      "color": "#FECA57"
+    },
+    "questions": []
+  },
+  {
+    "category": {
+      "id": 6,
+      "name": "観光・文化",
+      "color": "#FF9FF3"
+    },
+    "questions": []
+  },
+  {
+    "category": {
+      "id": 7,
+      "name": "防災・安全",
+      "color": "#54A0FF"
+    },
+    "questions": []
+  },
+  {
+    "category": {
+      "id": 8,
+      "name": "行政・財政",
+      "color": "#5F27CD"
+    },
+    "questions": []
+  },
+  {
+    "category": {
+      "id": 9,
+      "name": "交通・インフラ",
+      "color": "#00D2D3"
+    },
+    "questions": []
+  },
+  {
+    "category": {
+      "id": 10,
+      "name": "その他",
+      "color": "#FF6348"
+    },
+    "questions": []
+  }
+]
