@@ -15,6 +15,17 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    /* Flexboxコンテナとしての安定性向上 */
+    margin: 0;
+    padding: 0;
+}
+
+/* メインコンテンツエリア（main.container）の親としてのflexアイテム調整 */
+main.container {
+    /* flex-shrinkで縮小を防ぐ */
+    flex-shrink: 0;
+    /* 幅計算の安定性を向上 */
+    align-self: center;
 }
 
 .header {
@@ -87,6 +98,14 @@ body {
     padding: 0 1rem;
     /* メインコンテンツエリアが残りのスペースを占有 */
     flex-grow: 1;
+    /* Flexbox内での幅計算問題を修正 */
+    width: calc(100% - 2rem);
+    box-sizing: border-box;
+    /* margin設定を強制的に中央寄せ */
+    margin-left: auto !important;
+    margin-right: auto !important;
+    /* 最小幅を確保 */
+    min-width: 0;
 }
 
 /* PC版（1024px以上）でのコンテナ幅拡張 */
@@ -94,6 +113,16 @@ body {
     .container {
         max-width: 1400px;
         padding: 0 2rem;
+        width: calc(100% - 4rem);
+    }
+}
+
+/* 大画面（1600px以上）での追加調整 */
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1600px;
+        padding: 0 3rem;
+        width: calc(100% - 6rem);
     }
 }
 
