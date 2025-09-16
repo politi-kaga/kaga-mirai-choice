@@ -87,6 +87,7 @@ body {
 }
 
 .container {
+    width: 90%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
@@ -429,8 +430,9 @@ body {
 .party-kokumin { background: rgba(251, 190, 0, 0.1); color: #fbbe00; }
 
 .comparison-section {
-    margin: 2rem auto;
+    margin: 0 auto;
     width: 80%;
+    max-width: 1200px;
 }
 
 /* 政党別候補者リストセクションのスタイル */
