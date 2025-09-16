@@ -432,6 +432,27 @@ body {
     margin: 2rem 0;
 }
 
+/* 政策比較ページでは標準的なコンテナレイアウトを使用 */
+@media (min-width: 1280px) {
+    .comparison-section,
+    .category-scroll-container,
+    .question-card {
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
+        max-width: none;
+    }
+    
+    .category-tabs {
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
+        max-width: none;
+        transform: none;
+        position: static;
+    }
+}
+
 .category-scroll-container {
     position: relative;
     margin-bottom: 2rem;
