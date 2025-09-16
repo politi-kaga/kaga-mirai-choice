@@ -23,8 +23,8 @@ const config = {
   cssDir: 'css',
   jsDir: 'js',
   
-  // Google Analytics測定ID（後で置き換え可能）
-  googleAnalyticsId: 'G-XXXXXXXXXX',
+  // Google Analytics測定ID
+  googleAnalyticsId: 'G-4LW41SN6NF',
   
   // Google Search Console認証コード（後で置き換え可能）
   googleSiteVerification: 'YOUR_VERIFICATION_CODE_HERE'
