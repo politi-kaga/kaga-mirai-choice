@@ -237,10 +237,28 @@ body {
     }
 }
 
-/* 大画面（1440px以上）でさらに最適化 */
-@media (min-width: 1440px) {
+/* 大画面（1280px以上）で4カラム固定レイアウト */
+@media (min-width: 1280px) {
+    /* コンテナ幅を4カード対応に拡張 */
+    .container {
+        max-width: 1400px;
+    }
+    
+    /* 候補者グリッドを4カラム固定に変更 */
     .candidates-grid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        margin: 3rem 0;
+    }
+}
+
+/* 超大画面（1440px以上）でさらに最適化 */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1500px;
+    }
+    
+    .candidates-grid {
         gap: 2rem;
     }
 }
