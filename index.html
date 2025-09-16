@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kaga-mirai-choice | 加賀市議会議員選挙2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hiragino Sans', 'ヒラギノ角ゴシック', 'Yu Gothic', 'メイリオ', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8fafc;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            padding: 0.75rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 2rem 0;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        }
+        
+        .hero h1 {
+            font-size: 2rem;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .hero-subtitle {
+            font-size: 1rem;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-divider {
+            display: none;
+        }
+        
+        .quick-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .quick-nav-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            border: 2px solid transparent;
+        }
+        
+        .quick-nav-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            border-color: #3b82f6;
+        }
+        
+        .quick-nav-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #1e40af;
+        }
+        
+        .quick-nav-item p {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        
+        .election-info {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .election-info h2 {
+            color: #1e40af;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .info-item {
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .info-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .info-item strong {
+            color: #1e40af;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .info-item span {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        /* PC版での特別レイアウト */
+        @media (min-width: 1024px) {
+            .info-grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+            }
+            
+            .info-item:nth-child(1) { border-left-color: #ef4444; }
+            .info-item:nth-child(2) { border-left-color: #f97316; }
+            .info-item:nth-child(3) { border-left-color: #eab308; }
+            .info-item:nth-child(4) { border-left-color: #22c55e; }
+            .info-item:nth-child(5) { border-left-color: #3b82f6; }
+            .info-item:nth-child(6) { border-left-color: #8b5cf6; }
+        }
+        
+        .candidates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .candidate-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .candidate-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            border-color: #3b82f6;
+        }
+        
+        .candidate-photo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 0.8rem;
+            overflow: hidden;
+        }
+        
+        .candidate-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .candidate-photo span {
+            text-align: center;
+        }
+        
+        .candidate-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: #1e40af;
+        }
+        
+        .candidate-info {
+            font-size: 0.85rem;
+            color: #64748b;
+            text-align: center;
+            line-height: 1.4;
+        }
+        
+        .party-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 0;
+            vertical-align: baseline;
+            line-height: 1.3;
+            border: 1px solid currentColor;
+        }
+        
+        .party-ldp { background: rgba(231, 1, 18, 0.1); color: #e70112; }
+        .party-independent { background: #f3f4f6; color: #6b7280; }
+        .party-komeito { background: rgba(245, 88, 129, 0.1); color: #f55881; }
+        .party-communist { background: rgba(77, 120, 212, 0.1); color: #4d78d4; }
+        .party-constitutional { background: rgba(2, 65, 151, 0.1); color: #024197; }
+        .party-ishin { background: rgba(55, 194, 0, 0.1); color: #37c200; }
+        .party-kokumin { background: rgba(251, 190, 0, 0.1); color: #fbbe00; }
+        
+        .comparison-section {
+            margin: 2rem 0;
+        }
+        
+        .category-scroll-container {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .category-tabs {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding: 0.5rem 1rem;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding-left: 2rem;
+        }
+        
+        .category-tabs::-webkit-scrollbar {
+            height: 4px;
+        }
+        
+        .category-tabs::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 2px;
+        }
+        
+        .category-tabs::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 2px;
+        }
+        
+        .category-tab {
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            flex-shrink: 0;
+            color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        /* カテゴリ別の色分け - 常にカラフル */
+        .category-tab:nth-child(1) { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .category-tab:nth-child(2) { background: linear-gradient(135deg, #10b981, #059669); }
+        .category-tab:nth-child(3) { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .category-tab:nth-child(4) { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .category-tab:nth-child(5) { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+        .category-tab:nth-child(6) { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+        .category-tab:nth-child(7) { background: linear-gradient(135deg, #f97316, #ea580c); }
+        .category-tab:nth-child(8) { background: linear-gradient(135deg, #84cc16, #65a30d); }
+        .category-tab:nth-child(9) { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+        .category-tab:nth-child(10) { background: linear-gradient(135deg, #ec4899, #db2777); }
+        
+        /* その他ボタンを濃いグレーに */
+        .category-tab:last-child { background: linear-gradient(135deg, #4b5563, #374151) !important; }
+        
+        /* 「その他」カテゴリを含むボタンを濃いグレーに */
+        .category-tab[data-category*="その他"] { background: linear-gradient(135deg, #4b5563, #374151) !important; }
+        
+        .category-tab.active {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            filter: brightness(1.1) saturate(1.2);
+        }
+        
+        .category-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #e70112;
+            border-radius: 2px;
+        }
+        
+        /* 赤色ボタン（防災・復興、危機管理）のアクティブ下線を白に */
+        .category-tab:nth-child(1).active::after {
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* 防災・復興や危機管理を含むカテゴリの下線を白に */
+        .category-tab[data-category*="防災"].active::after,
+        .category-tab[data-category*="復興"].active::after,
+        .category-tab[data-category*="危機"].active::after {
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(90deg, transparent, rgba(248,250,252,0.95));
+            padding: 0.75rem;
+            pointer-events: none;
+            font-size: 1.2rem;
+            color: #3b82f6;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; transform: translateY(-50%) scale(1); }
+            50% { opacity: 1; transform: translateY(-50%) scale(1.1); }
+        }
+        
+        .question-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .question-header {
+            padding: 1.25rem;
+            cursor: pointer;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .question-header:hover {
+            background: #f8fafc;
+        }
+        
+        .question-title {
+            font-weight: 600;
+            color: #1e40af;
+            font-size: 0.95rem;
+        }
+        
+        .question-arrow {
+            font-size: 0.8rem;
+            color: #64748b;
+            transition: transform 0.3s;
+        }
+        
+        .question-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .question-content.active {
+            max-height: 1000px;
+            padding: 1rem;
+        }
+        
+        .answer-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .answer-candidate {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .answer-text {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        
+        .candidate-detail {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .candidate-header {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+        
+        .candidate-photo-large {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        
+        .candidate-photo-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        
+        .candidate-basic-info h2 {
+            font-size: 1.5rem;
+            color: #1e40af;
+            margin-bottom: 1rem;
+        }
+        
+        .candidate-basic-info .info-row {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .candidate-basic-info .info-row span:first-child {
+            color: #64748b;
+            min-width: 80px;
+        }
+        
+        .sns-links {
+            margin-top: 1rem;
+        }
+        
+        .sns-links h4 {
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .sns-links a {
+            display: inline-block;
+            margin-right: 1rem;
+            margin-bottom: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            background: #f1f5f9;
+            color: #3b82f6;
+            text-decoration: none;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+        
+        .sns-links a:hover {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .policy-section {
+            margin-top: 2rem;
+        }
+        
+        .policy-section h3 {
+            color: #1e40af;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .policy-item {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #3b82f6;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .policy-item div {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: pre-wrap;
+        }
+        
+        .policy-category {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* フッターのスタイル */
+        .footer {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: white;
+            margin-top: 3rem;
+            padding: 2rem 0;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .footer-content {
+            text-align: center;
+        }
+        
+        .footer-about {
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-link {
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            padding-bottom: 2px;
+        }
+        
+        .footer-link:hover {
+            color: #93c5fd;
+            border-bottom-color: #93c5fd;
+        }
+        
+        .footer-info {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+        
+        .footer-org {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .footer-contact {
+            margin: 0;
+        }
+        
+        .footer-email {
+            color: #60a5fa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-email:hover {
+            color: #93c5fd;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 0.5rem 0;
+            }
+            
+            .nav {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .candidate-header {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+            
+            .candidate-photo-large {
+                width: 150px;
+                height: 150px;
+                margin: 0 auto 1.5rem;
+            }
+            
+            .candidate-basic-info {
+                text-align: center;
+                width: 100%;
+            }
+            
+            .candidate-basic-info .info-row {
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .sns-links {
+                text-align: center;
+            }
+            
+            .scroll-indicator {
+                display: block;
+            }
+            
+            .category-tabs {
+                padding-bottom: 1rem;
+                padding-left: 1rem;
+            }
+            
+            .scroll-indicator {
+                right: 0.25rem;
+                font-size: 1rem;
+                padding: 0.5rem;
+            }
+            
+            .footer {
+                padding: 1.5rem 0;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .footer {
+                margin-top: 4rem;
+                padding: 3rem 0;
+            }
+            
+            .footer-link {
+                font-size: 1rem;
+            }
+            
+            .footer-info {
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .scroll-indicator {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo" onclick="showPage('home')">
+                <div class="logo-icon">🗳️</div>
+                加賀みらいチョイス
+            </a>
+            <div class="nav-links">
+                <a href="#" onclick="showPage('home')">ホーム</a>
+                <a href="#" onclick="showPage('candidates')">候補者一覧</a>
+                <a href="#" onclick="showPage('comparison')">政策比較</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- ホームページ -->
+        <div id="home-page">
+            <section class="hero">
+                <h1>加賀市議会議員選挙2025</h1>
+                <p class="hero-subtitle">あなたの一票で、加賀市の未来を選択しよう</p>
+                <div class="hero-divider"></div>
+            </section>
+
+            <div class="quick-nav">
+                <a href="#" class="quick-nav-item" onclick="showPage('candidates')">
+                    <h3>👥 候補者一覧</h3>
+                    <p>立候補者の詳細情報と政策をご覧いただけます</p>
+                </a>
+                <a href="#" class="quick-nav-item" onclick="showPage('comparison')">
+                    <h3>📊 政策比較</h3>
+                    <p>各候補者の政策を分野別に比較できます</p>
+                </a>
+            </div>
+
+            <div class="election-info">
+                <h2>📅 選挙情報</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>投票日</strong>
+                        <span>2025年10月5日（日）</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>告示日</strong>
+                        <span>2025年9月28日（土）</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>投票時間</strong>
+                        <span>午前7時〜午後8時</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>定数</strong>
+                        <span>18名</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>前回投票率</strong>
+                        <span>58.76%</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>期日前投票</strong>
+                        <span>9月29日〜10月4日</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 候補者一覧ページ -->
+        <div id="candidates-page" class="hidden">
+            <section class="hero">
+                <h1>候補者一覧</h1>
+                <p class="hero-subtitle">加賀市議会議員選挙2025の立候補者</p>
+                <div class="hero-divider"></div>
+            </section>
+
+            <div class="candidates-grid">
+                <div class="loading">候補者情報を読み込み中...</div>
+            </div>
+        </div>
+
+        <!-- 候補者詳細ページ -->
+        <div id="candidate-detail-page" class="hidden">
+            <section class="hero">
+                <h1>候補者詳細</h1>
+                <div class="hero-divider"></div>
+            </section>
+
+            <div class="candidate-detail">
+                <div class="candidate-header">
+                    <div class="loading">候補者情報を読み込み中...</div>
+                </div>
+
+                <div class="policy-section">
+                    <!-- APIから動的に読み込まれます -->
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 2rem 0;">
+                <button onclick="showPage('candidates')" style="padding: 0.75rem 2rem; background: #3b82f6; color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 0.9rem;">← 候補者一覧に戻る</button>
+            </div>
+        </div>
+
+        <!-- 公約比較ページ -->
+        <div id="comparison-page" class="hidden">
+            <section class="hero">
+                <h1>政策比較</h1>
+                <p class="hero-subtitle">分野別に候補者の政策を比較できます</p>
+                <div class="hero-divider"></div>
+            </section>
+
+            <div class="comparison-section">
+                <div class="category-scroll-container">
+                    <div class="category-tabs">
+                        <div class="loading">カテゴリを読み込み中...</div>
+                    </div>
+                    <div class="scroll-indicator">→</div>
+                </div>
+
+                <div id="category-content">
+                    <div class="loading">公約データを読み込み中...</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <a href="https://surf-hedge-480.notion.site/26b6a817b5fe80c994e9ce34982feb69" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="footer-link">
+                        加賀みらいチョイスについて
+                    </a>
+                </div>
+                <div class="footer-info">
+                    <p class="footer-org">運営：加賀みらいチョイス運営委員会</p>
+                    <p class="footer-contact">
+                        連絡先：
+                        <a href="mailto:kaga.democracy@gmail.com" class="footer-email">
+                            kaga.democracy@gmail.com
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // API設定
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxYQFMMz-Xh2vIDrj6FznzbuunLbdK26_oWz32KM3YjOIgQ6cmDQNV1KzMIEElUp16K/exec';
+        
+        // グローバル変数
+        let candidatesData = [];
+        let categoriesData = {};
+        
+        // ページ読み込み時にAPIからデータを取得
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCandidatesData();
+            updateScrollIndicator();
+        });
+        
+        // APIからデータを取得（高速化版）
+        async function loadCandidatesData() {
+            try {
+                console.log('🚀 APIからデータを取得中...', new Date().toLocaleTimeString());
+                
+                // ローディング表示を改善
+                showLoadingState();
+                
+                // パフォーマンス測定開始
+                const startTime = performance.now();
+                
+                // CORSエラーを回避するシンプルなfetchを試行
+                let response;
+                try {
+                    response = await fetch(API_URL);
+                } catch (corsError) {
+                    console.warn('⚠️ Standard fetch failed, trying with minimal headers');
+                    response = await fetch(API_URL, {
+                        method: 'GET',
+                        mode: 'cors',
+                        credentials: 'omit'
+                    });
+                }
+                
+                const fetchTime = performance.now() - startTime;
+                console.log(`📡 Fetch完了: ${fetchTime.toFixed(2)}ms`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const parseStartTime = performance.now();
+                const data = await response.json();
+                const parseTime = performance.now() - parseStartTime;
+                console.log(`🔄 JSON解析完了: ${parseTime.toFixed(2)}ms`);
+                
+                if (!Array.isArray(data) || data.length === 0) {
+                    throw new Error('データが空または無効な形式です');
+                }
+                
+                candidatesData = data;
+                console.log('取得したデータ:', candidatesData);
+                
+                // デバッグ: 各候補者のキー一覧を表示
+                candidatesData.forEach((candidate, index) => {
+                    console.log(`候補者${index + 1}のキー一覧:`, Object.keys(candidate));
+                    console.log(`候補者${index + 1}の氏名キー検索:`, 
+                        Object.keys(candidate).filter(key => key.includes('氏名') || key.includes('名前'))
+                    );
+                });
+                
+                // データを処理（高速化）
+                const processStartTime = performance.now();
+                processCandidatesData();
+                const processTime = performance.now() - processStartTime;
+                console.log(`⚙️ データ処理完了: ${processTime.toFixed(2)}ms`);
+                
+                // UIを更新（並列実行で高速化）
+                const uiStartTime = performance.now();
+                await Promise.all([
+                    new Promise(resolve => {
+                        requestAnimationFrame(() => {
+                            updateCandidatesList();
+                            resolve();
+                        });
+                    }),
+                    new Promise(resolve => {
+                        requestAnimationFrame(() => {
+                            updateComparisonData();
+                            resolve();
+                        });
+                    })
+                ]);
+                
+                const uiTime = performance.now() - uiStartTime;
+                const totalTime = performance.now() - startTime;
+                console.log(`🎨 UI更新完了: ${uiTime.toFixed(2)}ms`);
+                console.log(`✅ 全体完了時間: ${totalTime.toFixed(2)}ms`);
+                
+                // ローディング状態を解除
+                hideLoadingState();
+                
+            } catch (error) {
+                console.error('API取得エラー:', error);
+                hideLoadingState();
+                showError('データの取得に失敗しました。しばらく後に再度お試しください。');
+            }
+        }
+        
+        // ローディング状態を表示（アニメーション付き）
+        function showLoadingState() {
+            const loadingHtml = `
+                <div class="loading" style="display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 2rem;">
+                    <div style="width: 40px; height: 40px; border: 3px solid #e5e7eb; border-top: 3px solid #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 1rem;"></div>
+                    <div style="font-weight: 600; color: #3b82f6; margin-bottom: 0.5rem;">データを読み込み中...</div>
+                    <div style="font-size: 0.85rem; color: #6b7280;">しばらくお待ちください</div>
+                </div>
+                <style>
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+                </style>
+            `;
+            
+            const candidatesGrid = document.querySelector('.candidates-grid');
+            const categoryTabs = document.querySelector('.category-tabs');
+            const categoryContent = document.getElementById('category-content');
+            
+            if (candidatesGrid) candidatesGrid.innerHTML = loadingHtml;
+            if (categoryTabs) categoryTabs.innerHTML = '<div class="loading">🏷️ カテゴリを準備中...</div>';
+            if (categoryContent) categoryContent.innerHTML = '<div class="loading">📋 政策データを準備中...</div>';
+        }
+        
+        // ローディング状態を解除
+        function hideLoadingState() {
+            // 特別な処理は不要（updateCandidatesList等で上書きされる）
+        }
+        
+        // データを処理してカテゴリ別に整理（基本情報は除外）
+        function processCandidatesData() {
+            categoriesData = {};
+            
+            candidatesData.forEach(candidate => {
+                Object.keys(candidate).forEach(key => {
+                    // カテゴリ情報を抽出（基本情報は除外）
+                    const categoryMatch = key.match(/【(\d+_[^】]+)】(.+)/);
+                    if (categoryMatch && !key.includes('00_基本情報')) {
+                        const categoryName = categoryMatch[1];
+                        const questionText = categoryMatch[2];
+                        const answer = candidate[key];
+                        
+                        if (!categoriesData[categoryName]) {
+                            categoriesData[categoryName] = {};
+                        }
+                        
+                        if (!categoriesData[categoryName][questionText]) {
+                            categoriesData[categoryName][questionText] = [];
+                        }
+                        
+                        const candidateName = getCandidateValue(candidate, [
+                            '【00_基本情報】氏名',
+                            '【00_基本情報】氏名（ふりがな）',
+                            '【基本情報】氏名',
+                            '【基本情報】氏名（ふりがな）',
+                            '氏名（ふりがな）',
+                            '氏名',
+                            '名前'
+                        ]) || '不明';
+                        
+                        const candidateParty = getCandidateValue(candidate, [
+                            '【00_基本情報】所属政党',
+                            '【基本情報】所属政党',
+                            '所属政党',
+                            '政党'
+                        ]) || '無所属';
+                        
+                        categoriesData[categoryName][questionText].push({
+                            name: candidateName,
+                            party: candidateParty,
+                            answer: answer || '回答なし'
+                        });
+                    }
+                });
+            });
+            
+            console.log('処理されたカテゴリデータ:', categoriesData);
+        }
+        
+        // 候補者データから値を安全に取得する関数
+        function getCandidateValue(candidate, searchTerms) {
+            for (const term of searchTerms) {
+                const value = candidate[term];
+                if (value && value.toString().trim()) {
+                    return value.toString().trim();
+                }
+            }
+            
+            // 部分一致での検索
+            const keys = Object.keys(candidate);
+            for (const term of searchTerms) {
+                const matchKey = keys.find(key => key.includes(term.replace(/【.*?】/, '')));
+                if (matchKey && candidate[matchKey] && candidate[matchKey].toString().trim()) {
+                    return candidate[matchKey].toString().trim();
+                }
+            }
+            
+            return null;
+        }
+        
+        // 候補者一覧を更新
+        function updateCandidatesList() {
+            const candidatesGrid = document.querySelector('.candidates-grid');
+            if (!candidatesGrid || candidatesData.length === 0) return;
+            
+            candidatesGrid.innerHTML = '';
+            
+            candidatesData.forEach((candidate, index) => {
+                // より柔軟な候補者データ取得
+                const name = getCandidateValue(candidate, [
+                    '【00_基本情報】氏名',
+                    '【00_基本情報】氏名（ふりがな）',
+                    '【基本情報】氏名',
+                    '【基本情報】氏名（ふりがな）',
+                    '氏名（ふりがな）',
+                    '氏名',
+                    '名前',
+                    'name'
+                ]) || `候補者${index + 1}`;
+                
+                const age = getCandidateValue(candidate, [
+                    '【00_基本情報】年齢',
+                    '【基本情報】年齢', 
+                    '年齢',
+                    'age'
+                ]) || '不明';
+                
+                const party = getCandidateValue(candidate, [
+                    '【00_基本情報】所属政党',
+                    '【基本情報】所属政党',
+                    '所属政党',
+                    '政党',
+                    'party'
+                ]) || '無所属';
+                
+                const experience = getCandidateValue(candidate, [
+                    '【00_基本情報】当選回数',
+                    '【基本情報】当選回数',
+                    '当選回数',
+                    '当選歴',
+                    'election_history'
+                ]) || '不明';
+                
+                const imageUrl = getCandidateValue(candidate, [
+                    '【00_基本情報】あなたのプロフィール画像を添付してください。',
+                    '【基本情報】プロフィール画像',
+                    'プロフィール画像',
+                    '画像',
+                    'photo_url',
+                    'image'
+                ]) || '';
+                
+                console.log(`候補者${index + 1}: 名前="${name}", 年齢="${age}", 政党="${party}"`);
+                
+                // 政党に応じたクラス
+                const partyClass = getPartyClass(party);
+                
+                const candidateCard = document.createElement('div');
+                candidateCard.className = 'candidate-card';
+                candidateCard.onclick = () => showCandidateDetail(index);
+                
+                candidateCard.innerHTML = `
+                    <div class="candidate-photo">
+                        ${imageUrl ? 
+                            `<img src="${toDriveImageUrl(imageUrl)}" alt="${name}の写真" 
+                                  onerror="handleImageError(this, '${name}');" 
+                                  loading="lazy" 
+                                  decoding="async"
+                                  referrerpolicy="no-referrer"
+                                  style="transition: opacity 0.3s ease;">` : 
+                            '<span style="font-size: 0.8rem; color: #6b7280; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">写真<br>準備中</span>'
+                        }
+                    </div>
+                    <div class="candidate-name">${name}</div>
+                    <div class="candidate-info">
+                        年齢: ${age}歳<br>
+                        当選歴: ${experience}
+                    </div>
+                    <div class="party-badge ${partyClass}">${party}</div>
+                `;
+                
+                candidatesGrid.appendChild(candidateCard);
+            });
+        }
+        
+        // Google DriveのURLを画像表示用に変換（ORB対応版）
+        function toDriveImageUrl(url, size = 400) {
+            if (!url || typeof url !== 'string') {
+                console.warn('⚠️ Invalid image URL provided:', url);
+                return '';
+            }
+            
+            console.log('📷 Processing image URL:', url);
+            
+            // 複数のパターンに対応してファイルIDを抽出
+            let fileId = null;
+            
+            const patterns = [
+                /\/file\/d\/([a-zA-Z0-9_-]+)\/view/,  // /file/d/ID/view
+                /\/file\/d\/([a-zA-Z0-9_-]+)/,       // /file/d/ID
+                /\/d\/([a-zA-Z0-9_-]+)/,             // /d/ID
+                /id=([a-zA-Z0-9_-]+)/,               // id=ID
+                /open\?id=([a-zA-Z0-9_-]+)/,         // open?id=ID
+                /^([a-zA-Z0-9_-]{25,})$/             // IDのみ
+            ];
+            
+            for (const pattern of patterns) {
+                const match = url.match(pattern);
+                if (match) {
+                    fileId = match[1];
+                    break;
+                }
+            }
+            
+            if (!fileId) {
+                console.warn('⚠️ Could not extract file ID from URL:', url);
+                return url; // 変換できない場合は元URLを返す
+            }
+            
+            console.log('📷 Extracted file ID:', fileId);
+            
+            // ORBエラーを回避するため、thumbnailエンドポイントを使用
+            const imageUrl = `https://lh3.googleusercontent.com/d/${fileId}=w${size}-h${size}-c`;
+            console.log('📷 Generated image URL:', imageUrl);
+            
+            return imageUrl;
+        }
+        
+        // 画像読み込みエラー時の処理
+        function handleImageError(img, candidateName = '候補者') {
+            console.warn('⚠️ Image load failed for:', candidateName, 'src:', img.src);
+            
+            // 代替URLを試行（Google Driveの別エンドポイント）
+            const currentSrc = img.src;
+            if (currentSrc.includes('lh3.googleusercontent.com')) {
+                // GoogleドライブのUCエンドポイントを試行
+                const fileIdMatch = currentSrc.match(/\/d\/([a-zA-Z0-9_-]+)/);
+                if (fileIdMatch) {
+                    const altUrl = `https://drive.google.com/uc?export=view&id=${fileIdMatch[1]}`;
+                    console.log('🔄 Trying alternative URL:', altUrl);
+                    img.src = altUrl;
+                    
+                    // 代替URLでも失敗した場合のエラーハンドラーを設定
+                    img.onerror = function() {
+                        console.warn('❌ Alternative URL also failed for:', candidateName);
+                        img.style.display = 'none';
+                        img.parentElement.innerHTML = `<span style="font-size: 0.8rem; color: #6b7280; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">写真<br>準備中</span>`;
+                    };
+                    return; // 代替URLを試行中
+                }
+            }
+            
+            // 最終的なフォールバック表示
+            img.style.display = 'none';
+            img.parentElement.innerHTML = `<span style="font-size: 0.8rem; color: #6b7280; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">写真<br>準備中</span>`;
+        }
+        
+        // 政党に応じたCSSクラスを取得
+        function getPartyClass(party) {
+            if (party.includes('自民') || party.includes('自由民主')) return 'party-ldp';
+            if (party.includes('立憲') || party.includes('立憲民主')) return 'party-constitutional';
+            if (party.includes('公明')) return 'party-komeito';
+            if (party.includes('維新') || party.includes('日本維新')) return 'party-ishin';
+            if (party.includes('共産') || party.includes('日本共産')) return 'party-communist';
+            if (party.includes('国民') || party.includes('国民民主')) return 'party-kokumin';
+            return 'party-independent';
+        }
+        
+        // 公約比較データを更新
+        function updateComparisonData() {
+            updateCategoryTabs();
+        }
+        
+        // カテゴリタブを更新
+        function updateCategoryTabs() {
+            const categoryTabs = document.querySelector('.category-tabs');
+            if (!categoryTabs) return;
+            
+            const categories = Object.keys(categoriesData).sort();
+            
+            categoryTabs.innerHTML = '';
+            categories.forEach((category, index) => {
+                const displayName = category.replace(/^\d+_/, '');
+                const button = document.createElement('button');
+                button.className = `category-tab ${index === 0 ? 'active' : ''}`;
+                button.textContent = displayName;
+                button.setAttribute('data-category', displayName);
+                button.onclick = () => showCategory(index, category);
+                categoryTabs.appendChild(button);
+            });
+            
+            // 最初のカテゴリを表示
+            if (categories.length > 0) {
+                updateCategoryContent(categories[0]);
+            }
+        }
+        
+        // エラー表示
+        function showError(message) {
+            const candidatesGrid = document.querySelector('.candidates-grid');
+            const categoryTabs = document.querySelector('.category-tabs');
+            const categoryContent = document.getElementById('category-content');
+            
+            if (candidatesGrid) candidatesGrid.innerHTML = `<div class="loading">${message}</div>`;
+            if (categoryTabs) categoryTabs.innerHTML = `<div class="loading">${message}</div>`;
+            if (categoryContent) categoryContent.innerHTML = `<div class="loading">${message}</div>`;
+        }
+
+        function showPage(pageId) {
+            // すべてのページを非表示
+            document.getElementById('home-page').classList.add('hidden');
+            document.getElementById('candidates-page').classList.add('hidden');
+            document.getElementById('comparison-page').classList.add('hidden');
+            document.getElementById('candidate-detail-page').classList.add('hidden');
+            
+            // 指定されたページを表示
+            document.getElementById(pageId + '-page').classList.remove('hidden');
+        }
+
+        function showCandidateDetail(candidateIndex) {
+            if (candidatesData.length > candidateIndex) {
+                updateCandidateDetailPage(candidateIndex);
+            }
+            showPage('candidate-detail');
+        }
+        
+        // 候補者詳細ページを更新
+        function updateCandidateDetailPage(candidateIndex) {
+            const candidate = candidatesData[candidateIndex];
+            if (!candidate) return;
+            
+            const name = getCandidateValue(candidate, [
+                '【00_基本情報】氏名',
+                '【00_基本情報】氏名（ふりがな）',
+                '【基本情報】氏名',
+                '【基本情報】氏名（ふりがな）',
+                '氏名（ふりがな）',
+                '氏名',
+                '名前'
+            ]) || '候補者';
+            
+            const age = getCandidateValue(candidate, [
+                '【00_基本情報】年齢',
+                '【基本情報】年齢',
+                '年齢'
+            ]) || '不明';
+            
+            const party = getCandidateValue(candidate, [
+                '【00_基本情報】所属政党',
+                '【基本情報】所属政党',
+                '所属政党',
+                '政党'
+            ]) || '無所属';
+            
+            const experience = getCandidateValue(candidate, [
+                '【00_基本情報】当選回数',
+                '【基本情報】当選回数',
+                '当選回数',
+                '当選歴'
+            ]) || '不明';
+            
+            const imageUrl = getCandidateValue(candidate, [
+                '【00_基本情報】あなたのプロフィール画像を添付してください。',
+                '【基本情報】プロフィール画像',
+                'プロフィール画像',
+                '画像'
+            ]) || '';
+            
+            // SNSリンクを取得
+            const snsLinks = [];
+            for (let i = 1; i <= 5; i++) {
+                const url = candidate[`【00_基本情報】ウェブサイトやSNSアカウントのURL${i === 1 ? '①' : i === 2 ? '②' : i === 3 ? '③' : i === 4 ? '④' : '⑤'}`];
+                if (url && url.trim()) {
+                    snsLinks.push(url.trim());
+                }
+            }
+            
+            // 基本情報を更新
+            const candidateHeader = document.querySelector('.candidate-header');
+            if (candidateHeader) {
+                let snsHtml = '';
+                if (snsLinks.length > 0) {
+                    snsHtml = `
+                        <div class="sns-links">
+                            <h4>ウェブサイト・SNS</h4>
+                            ${snsLinks.map(url => {
+                                const displayText = getSNSDisplayName(url);
+                                const fullUrl = url.startsWith('http') ? url : `https://${url}`;
+                                return `<a href="${fullUrl}" target="_blank" rel="noopener">${displayText}</a>`;
+                            }).join('')}
+                        </div>
+                    `;
+                }
+                
+                candidateHeader.innerHTML = `
+                    <div class="candidate-photo-large">
+                        ${imageUrl ? 
+                            `<img src="${toDriveImageUrl(imageUrl, 600)}" alt="${name}の写真" 
+                                  onerror="handleImageError(this, '${name}');" 
+                                  loading="lazy" 
+                                  referrerpolicy="no-referrer">` : 
+                            '<span style="font-size: 1rem; color: #6b7280; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">写真<br>準備中</span>'
+                        }
+                    </div>
+                    <div class="candidate-basic-info">
+                        <h2>${name}</h2>
+                        <div class="info-row">
+                            <span>年齢:</span>
+                            <span>${age}歳</span>
+                        </div>
+                        <div class="info-row">
+                            <span>当選歴:</span>
+                            <span>${experience}</span>
+                        </div>
+                        <div class="info-row">
+                            <span>政党:</span>
+                            <span class="party-badge ${getPartyClass(party)}">${party}</span>
+                        </div>
+                        ${snsHtml}
+                    </div>
+                `;
+            }
+            
+            // 政策セクションを更新（全項目表示版）
+            const policySection = document.querySelector('.policy-section');
+            if (policySection) {
+                let policiesHtml = '<h3>政策</h3>';
+                
+                // 全候補者から全てのアンケート項目を収集
+                const allQuestions = getAllQuestionItems();
+                
+                // カテゴリ別にグループ化
+                const questionsByCategory = {};
+                allQuestions.forEach(questionKey => {
+                    const categoryMatch = questionKey.match(/【(\d+_[^】]+)】(.+)/);
+                    if (categoryMatch && !questionKey.includes('00_基本情報')) {
+                        const fullCategoryName = categoryMatch[1]; // 数字プレフィックス付きのカテゴリ名を保持
+                        const categoryName = fullCategoryName.replace(/^\d+_/, ''); // 表示用から数字を除去
+                        const questionText = categoryMatch[2];
+                        
+                        if (!questionsByCategory[fullCategoryName]) {
+                            questionsByCategory[fullCategoryName] = [];
+                        }
+                        
+                        questionsByCategory[fullCategoryName].push({
+                            key: questionKey,
+                            text: questionText
+                        });
+                    }
+                });
+                
+                // より正確な順序制御 - 数字プレフィックスを使用してソート
+                const sortedCategories = Object.keys(questionsByCategory).sort((a, b) => {
+                    // 数字プレフィックス（01_, 02_など）でソート
+                    const aNum = parseInt(a.match(/^(\d+)/)?.[1] || '999');
+                    const bNum = parseInt(b.match(/^(\d+)/)?.[1] || '999');
+                    
+                    if (aNum !== bNum) {
+                        return aNum - bNum;
+                    }
+                    
+                    // 数字が同じかない場合は名前でソート
+                    return a.localeCompare(b);
+                });
+                
+                sortedCategories.forEach(fullCategoryName => {
+                    const categoryName = fullCategoryName.replace(/^\d+_/, '');
+                    const questions = questionsByCategory[fullCategoryName];
+
+                    
+                    // カテゴリヘッダー
+                    policiesHtml += `
+                        <div style="margin-top: 2rem; margin-bottom: 1rem; padding: 0.75rem; background: linear-gradient(135deg, #3b82f6, #1e40af); color: white; border-radius: 8px; font-weight: 600;">
+                            📋 ${categoryName}
+                        </div>
+                    `;
+                    
+                    questions.forEach(question => {
+                        const answer = candidate[question.key];
+                        const displayAnswer = (answer && answer.toString().trim()) ? answer.toString().trim() : '回答なし';
+                        const answerClass = (answer && answer.toString().trim()) ? '' : ' style="color: #9ca3af; font-style: italic;"';
+                        
+                        policiesHtml += `
+                            <div class="policy-item">
+                                <div><strong>Q:</strong> ${question.text}</div>
+                                <div${answerClass}><strong>A:</strong> ${displayAnswer}</div>
+                            </div>
+                        `;
+                    });
+                });
+                
+                policySection.innerHTML = policiesHtml;
+            }
+        }
+        
+        // 全候補者から全てのアンケート項目を収集する関数
+        function getAllQuestionItems() {
+            const allQuestions = new Set();
+            
+            candidatesData.forEach(candidate => {
+                Object.keys(candidate).forEach(key => {
+                    // 基本情報以外のアンケート項目を収集
+                    if (key.includes('【') && key.includes('】') && !key.includes('00_基本情報')) {
+                        allQuestions.add(key);
+                    }
+                });
+            });
+            
+            // Set を配列に変換してソート
+            return Array.from(allQuestions).sort();
+        }
+        
+        // SNSのURLから表示名を取得
+        function getSNSDisplayName(url) {
+            const lowerUrl = url.toLowerCase();
+            if (lowerUrl.includes('twitter') || lowerUrl.includes('x.com')) return 'X (Twitter)';
+            if (lowerUrl.includes('facebook')) return 'Facebook';
+            if (lowerUrl.includes('instagram')) return 'Instagram';
+            if (lowerUrl.includes('youtube')) return 'YouTube';
+            if (lowerUrl.includes('tiktok')) return 'TikTok';
+            if (lowerUrl.includes('line')) return 'LINE';
+            if (lowerUrl.includes('mixi')) return 'mixi';
+            if (lowerUrl.includes('ameba')) return 'Ameba';
+            return 'ウェブサイト';
+        }
+
+        function showCategory(categoryIndex, categoryKey = null) {
+            // すべてのタブを非アクティブ
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // クリックされたタブをアクティブ
+            document.querySelectorAll('.category-tab')[categoryIndex].classList.add('active');
+            
+            // カテゴリ別のコンテンツを表示
+            if (categoryKey && categoriesData[categoryKey]) {
+                updateCategoryContent(categoryKey);
+            }
+        }
+        
+        // カテゴリコンテンツを更新
+        function updateCategoryContent(categoryKey) {
+            const categoryContent = document.getElementById('category-content');
+            if (!categoryContent) return;
+            
+            const questions = categoriesData[categoryKey];
+            let contentHtml = '';
+            
+            Object.keys(questions).forEach((questionText, index) => {
+                const answers = questions[questionText];
+                
+                contentHtml += `
+                    <div class="question-card">
+                        <div class="question-header" onclick="toggleQuestion('${categoryKey}-${index}')">
+                            <span class="question-title">${questionText}</span>
+                            <span class="question-arrow">▼</span>
+                        </div>
+                        <div class="question-content" id="question-${categoryKey}-${index}">
+                `;
+                
+                answers.forEach(answer => {
+                    if (answer.answer && answer.answer.trim()) {
+                        contentHtml += `
+                            <div class="answer-item">
+                                <div class="answer-candidate">${answer.name}（${answer.party}）</div>
+                                <div class="answer-text">${answer.answer}</div>
+                            </div>
+                        `;
+                    }
+                });
+                
+                contentHtml += `
+                        </div>
+                    </div>
+                `;
+            });
+            
+            categoryContent.innerHTML = contentHtml;
+        }
+
+        function toggleQuestion(questionId) {
+            const content = document.getElementById('question-' + questionId);
+            if (!content) return;
+            
+            const header = content.previousElementSibling;
+            const arrow = header.querySelector('.question-arrow');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                arrow.textContent = '▼';
+            } else {
+                content.classList.add('active');
+                arrow.textContent = '▲';
+            }
+        }
+
+        // カテゴリタブのスクロール機能
+        function updateScrollIndicator() {
+            const tabsContainer = document.querySelector('.category-tabs');
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            
+            if (!tabsContainer || !scrollIndicator) return;
+            
+            function checkScroll() {
+                const isScrollable = tabsContainer.scrollWidth > tabsContainer.clientWidth;
+                const isAtEnd = tabsContainer.scrollLeft >= (tabsContainer.scrollWidth - tabsContainer.clientWidth - 10);
+                
+                if (isScrollable && !isAtEnd) {
+                    scrollIndicator.style.opacity = '1';
+                } else {
+                    scrollIndicator.style.opacity = '0';
+                }
+            }
+            
+            tabsContainer.addEventListener('scroll', checkScroll);
+            window.addEventListener('resize', checkScroll);
+            setTimeout(checkScroll, 100);
+        }
+    </script>
+</body>
+</html>
+
