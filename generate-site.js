@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// Cache-busting deployment to fix 404 errors
 
 const fs = require('fs-extra');
 const path = require('path');
