@@ -790,6 +790,10 @@ async function generateSite() {
     await fs.writeFile(path.join(config.distDir, 'index.html'), homeHtml);
     console.log('🏠 ホームページを生成しました');
     
+    // .nojekyll ファイルを作成（GitHub Pages用）
+    await fs.writeFile(path.join(config.distDir, '.nojekyll'), '');
+    console.log('🔧 .nojekyll ファイルを作成しました（GitHub Pages用）');
+    
     // candidates ディレクトリと候補者一覧ページを生成
     await fs.ensureDir(path.join(config.distDir, 'candidates'));
     
@@ -826,6 +830,8 @@ async function generateSite() {
       
       console.log(`👤 候補者${mapping.index + 1}の詳細ページを生成しました (/candidates/${mapping.slug}/)`);
     }
+    
+    console.log(`✅ 合計${slugMapping.length}個の候補者詳細ページを生成完了`);
     
     // comparison ディレクトリと政策比較ページを生成
     await fs.ensureDir(path.join(config.distDir, 'comparison'));
