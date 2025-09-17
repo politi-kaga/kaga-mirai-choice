@@ -1,0 +1,971 @@
+/* 加賀みらいチョイス - メインスタイルシート */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Hiragino Sans', 'ヒラギノ角ゴシック', 'Yu Gothic', 'メイリオ', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8fafc;
+    /* フッター最下部固定のためのFlexboxレイアウト */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* Flexboxコンテナとしての安定性向上 */
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.header {
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    color: white;
+    padding: 0.75rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+.nav-links a:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.nav-links a.current-page {
+    background: rgba(255,255,255,0.2);
+    font-weight: 600;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    /* メインコンテンツエリアが残りのスペースを占有 */
+    flex-grow: 1;
+}
+
+.hero {
+    text-align: center;
+    padding: 2rem 0;
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+}
+
+/* PC画面でheroセクションの幅を拡張 */
+@media (min-width: 1280px) {
+    .hero {
+        margin: 0 calc(-50vw + 50%);
+        width: 100vw;
+        padding: 3rem 2rem;
+    }
+}
+
+/* 大画面でheroセクションをさらに最適化 */
+@media (min-width: 1440px) {
+    .hero {
+        padding: 3.5rem 3rem;
+    }
+}
+
+@media (min-width: 1600px) {
+    .hero {
+        padding: 4rem 4rem;
+    }
+}
+
+@media (min-width: 1920px) {
+    .hero {
+        padding: 4.5rem 5rem;
+    }
+}
+
+.hero h1 {
+    font-size: 2rem;
+    color: #1e40af;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    color: #64748b;
+    margin-bottom: 1.5rem;
+}
+
+.hero-divider {
+    display: none;
+}
+
+.quick-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.quick-nav-item {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    border: 2px solid transparent;
+}
+
+.quick-nav-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    border-color: #3b82f6;
+}
+
+.quick-nav-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #1e40af;
+}
+
+.quick-nav-item p {
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.election-info {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.election-info h2 {
+    color: #1e40af;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-item {
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    border-left: 4px solid #3b82f6;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.info-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.info-item strong {
+    color: #1e40af;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-item span {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+/* PC版での特別レイアウト */
+@media (min-width: 1024px) {
+    .info-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+    }
+    
+    .info-item:nth-child(1) { border-left-color: #ef4444; }
+    .info-item:nth-child(2) { border-left-color: #f97316; }
+    .info-item:nth-child(3) { border-left-color: #eab308; }
+    .info-item:nth-child(4) { border-left-color: #22c55e; }
+    .info-item:nth-child(5) { border-left-color: #3b82f6; }
+    .info-item:nth-child(6) { border-left-color: #8b5cf6; }
+}
+
+.candidates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+/* PC版でのグリッドレイアウト最適化 */
+@media (min-width: 1024px) {
+    .candidates-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin: 3rem 0;
+    }
+}
+
+/* 大画面（1280px以上）で4カラム固定レイアウト */
+@media (min-width: 1280px) {
+    /* コンテナ幅は適度に保ち - 候補者グリッドは別途最適化 */
+    .container {
+        max-width: 1400px;
+    }
+    
+    /* 候補者グリッドを4カラム固定に変更 + 横幅最大活用 */
+    .candidates-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        margin: 3rem calc(-50vw + 50%);
+        padding: 0 2rem;
+        width: 100vw;
+        max-width: none;
+    }
+}
+
+/* 超大画面（1440px以上）でさらに最適化 */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1500px;
+    }
+    
+    .candidates-grid {
+        gap: 2rem;
+        margin: 3rem calc(-50vw + 50%);
+        padding: 0 3rem;
+        width: 100vw;
+    }
+}
+
+/* 極大画面（1600px以上）でさらに最適化 */
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1600px;
+    }
+    
+    .candidates-grid {
+        gap: 2.5rem;
+        margin: 3rem calc(-50vw + 50%);
+        padding: 0 4rem;
+        width: 100vw;
+    }
+}
+
+/* 超大画面（1920px以上）で適度なコンテナ幅保持 */
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1700px;
+    }
+    
+    .candidates-grid {
+        gap: 3rem;
+        margin: 3rem calc(-50vw + 50%);
+        padding: 0 5rem;
+        width: 100vw;
+    }
+}
+
+.candidate-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+    cursor: pointer;
+    border: 2px solid transparent;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* PC画面でのカード内パディング調整 */
+@media (min-width: 1280px) {
+    .candidate-card {
+        padding: 2rem;
+    }
+}
+
+.candidate-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    border-color: #3b82f6;
+}
+
+.candidate-photo {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    font-size: 0.8rem;
+    overflow: hidden;
+}
+
+.candidate-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.candidate-photo span {
+    text-align: center;
+}
+
+.candidate-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: #1e40af;
+}
+
+/* PC画面での候補者情報表示最適化 */
+@media (min-width: 1280px) {
+    .candidate-photo {
+        width: 90px;
+        height: 90px;
+        margin: 0 auto 1.25rem;
+    }
+    
+    .candidate-name {
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .candidate-info {
+        font-size: 0.9rem;
+    }
+}
+
+.candidate-info {
+    font-size: 0.85rem;
+    color: #64748b;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.party-badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin: 0;
+    vertical-align: baseline;
+    line-height: 1.3;
+    border: 1px solid currentColor;
+}
+
+.party-ldp { background: rgba(231, 1, 18, 0.1); color: #e70112; }
+.party-independent { background: #f3f4f6; color: #6b7280; }
+.party-komeito { background: rgba(245, 88, 129, 0.1); color: #f55881; }
+.party-communist { background: rgba(77, 120, 212, 0.1); color: #4d78d4; }
+.party-constitutional { background: rgba(2, 65, 151, 0.1); color: #024197; }
+.party-ishin { background: rgba(55, 194, 0, 0.1); color: #37c200; }
+.party-kokumin { background: rgba(251, 190, 0, 0.1); color: #fbbe00; }
+
+.comparison-section {
+    margin: 0 auto;
+    width: 80%;
+    max-width: 1200px;
+}
+
+
+
+/* 政策比較ページでは80%幅のコンテナレイアウトを使用 */
+@media (min-width: 1280px) {
+    /* 政策比較セクションの幅も80%に設定 */
+    .comparison-section {
+        width: 80%;
+        max-width: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .category-scroll-container,
+    .question-card {
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
+        max-width: none;
+    }
+    
+    .category-tabs {
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
+        max-width: none;
+        transform: none;
+        position: static;
+    }
+}
+
+/* 大画面でも政策比較の80%幅を維持 */
+@media (min-width: 1440px) {
+    .comparison-section {
+        width: 80%;
+    }
+}
+
+@media (min-width: 1600px) {
+    .comparison-section {
+        width: 80%;
+    }
+}
+
+@media (min-width: 1920px) {
+    .comparison-section {
+        width: 80%;
+    }
+}
+
+.category-scroll-container {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.category-tabs {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 0.5rem 1rem;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding-left: 2rem;
+}
+
+.category-tabs::-webkit-scrollbar {
+    height: 4px;
+}
+
+.category-tabs::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 2px;
+}
+
+.category-tabs::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 2px;
+}
+
+.category-tab {
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.category-tab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* カテゴリ別の色分け - 常にカラフル */
+.category-tab:nth-child(1) { background: linear-gradient(135deg, #ef4444, #dc2626); }
+.category-tab:nth-child(2) { background: linear-gradient(135deg, #10b981, #059669); }
+.category-tab:nth-child(3) { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.category-tab:nth-child(4) { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+.category-tab:nth-child(5) { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+.category-tab:nth-child(6) { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+.category-tab:nth-child(7) { background: linear-gradient(135deg, #f97316, #ea580c); }
+.category-tab:nth-child(8) { background: linear-gradient(135deg, #84cc16, #65a30d); }
+.category-tab:nth-child(9) { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+.category-tab:nth-child(10) { background: linear-gradient(135deg, #ec4899, #db2777); }
+
+/* その他ボタンを濃いグレーに */
+.category-tab:last-child { background: linear-gradient(135deg, #4b5563, #374151) !important; }
+
+/* 「その他」カテゴリを含むボタンを濃いグレーに */
+.category-tab[data-category*="その他"] { background: linear-gradient(135deg, #4b5563, #374151) !important; }
+
+.category-tab.active {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    filter: brightness(1.1) saturate(1.2);
+}
+
+.category-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #e70112;
+    border-radius: 2px;
+}
+
+/* 赤色ボタン（防災・復興、危機管理）のアクティブ下線を白に */
+.category-tab:nth-child(1).active::after {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+/* 防災・復興や危機管理を含むカテゴリの下線を白に */
+.category-tab[data-category*="防災"].active::after,
+.category-tab[data-category*="復興"].active::after,
+.category-tab[data-category*="危機"].active::after {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.scroll-indicator {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(90deg, transparent, rgba(248,250,252,0.95));
+    padding: 0.75rem;
+    pointer-events: none;
+    font-size: 1.2rem;
+    color: #3b82f6;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; transform: translateY(-50%) scale(1); }
+    50% { opacity: 1; transform: translateY(-50%) scale(1.1); }
+}
+
+.question-card {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.question-header {
+    padding: 1.25rem;
+    cursor: pointer;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+}
+
+.question-header:hover {
+    background: #f8fafc;
+}
+
+.question-title {
+    font-weight: 600;
+    color: #1e40af;
+    font-size: 0.95rem;
+}
+
+.question-arrow {
+    font-size: 0.8rem;
+    color: #64748b;
+    transition: transform 0.3s;
+}
+
+.question-content {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.question-content.active {
+    max-height: 1000px;
+    padding: 1rem;
+}
+
+.answer-item {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    border-left: 4px solid #3b82f6;
+}
+
+.answer-candidate {
+    font-weight: 600;
+    color: #1e40af;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.answer-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.candidate-detail {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    width: 70%;
+}
+
+.candidate-header {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    align-items: flex-start;
+}
+
+.candidate-photo-large {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.candidate-photo-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.candidate-basic-info h2 {
+    font-size: 1.5rem;
+    color: #1e40af;
+    margin-bottom: 1rem;
+}
+
+.candidate-basic-info .info-row {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.candidate-basic-info .info-row span:first-child {
+    color: #64748b;
+    min-width: 80px;
+}
+
+.sns-links {
+    margin-top: 1rem;
+}
+
+.sns-links h4 {
+    color: #1e40af;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.sns-links a {
+    display: inline-block;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background: #f1f5f9;
+    color: #3b82f6;
+    text-decoration: none;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+}
+
+.sns-links a:hover {
+    background: #3b82f6;
+    color: white;
+}
+
+.policy-section {
+    margin-top: 2rem;
+}
+
+.policy-section h3 {
+    color: #1e40af;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.policy-item {
+    background: #f8fafc;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border-left: 4px solid #3b82f6;
+    /* 長いURL・英単語の強制折り返し */
+    overflow-wrap: break-word;
+    word-wrap: break-word; /* 旧ブラウザ用の互換性のため */
+    word-break: break-all; /* より強制的な折り返し */
+}
+
+.policy-item div {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.policy-category {
+    font-weight: 600;
+    color: #1e40af;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #64748b;
+}
+
+.hidden {
+    display: none;
+}
+
+/* 戻るボタンのスタイル */
+.back-button {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: #3b82f6;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    margin: 2rem 0;
+}
+
+.back-button:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* フッターのスタイル */
+.footer {
+    background: linear-gradient(135deg, #1e293b, #334155);
+    color: white;
+    margin-top: 3rem;
+    padding: 2rem 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.footer-content {
+    text-align: center;
+}
+
+.footer-about {
+    margin-bottom: 1.5rem;
+}
+
+.footer-link {
+    color: #60a5fa;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+    padding-bottom: 2px;
+}
+
+.footer-link:hover {
+    color: #93c5fd;
+    border-bottom-color: #93c5fd;
+}
+
+.footer-info {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+}
+
+.footer-org {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.footer-contact {
+    margin: 0;
+}
+
+.footer-email {
+    color: #60a5fa;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-email:hover {
+    color: #93c5fd;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .header {
+        padding: 0.5rem 0;
+    }
+    
+    .nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+    }
+    
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .candidate-header {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .candidate-photo-large {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 1.5rem;
+    }
+    
+    .candidate-basic-info {
+        text-align: center;
+        width: 100%;
+    }
+    
+    .candidate-basic-info .info-row {
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    .sns-links {
+        text-align: center;
+    }
+    
+    .scroll-indicator {
+        display: block;
+    }
+    
+    .category-tabs {
+        padding-bottom: 1rem;
+        padding-left: 1rem;
+    }
+    
+    .scroll-indicator {
+        right: 0.25rem;
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+    
+    .footer {
+        padding: 1.5rem 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    .footer {
+        margin-top: 4rem;
+        padding: 3rem 0;
+    }
+    
+    .footer-link {
+        font-size: 1rem;
+    }
+    
+    .footer-info {
+        font-size: 0.85rem;
+    }
+}
+
+@media (min-width: 769px) {
+    .scroll-indicator {
+        display: none;
+    }
+}/* Cache busting: Wed Sep 17 07:25:03 UTC 2025 */
