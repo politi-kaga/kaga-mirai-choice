@@ -204,8 +204,8 @@ function updateCandidatesList() {
         const mapping = slugMapping.find(m => m.index === index);
         const slug = mapping ? mapping.slug : `${index}`;
         
-        // 候補者詳細ページのURLを生成（GitHub Pages構造に対応）
-        const candidateDetailUrl = `/kaga-mirai-choice/candidates/${slug}/`;
+        // 候補者詳細ページのURLを生成（相対パスで正しく動作）
+        const candidateDetailUrl = `./${slug}/`;
         
         const candidateCard = document.createElement('a');
         candidateCard.className = 'candidate-card';
