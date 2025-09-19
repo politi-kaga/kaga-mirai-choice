@@ -1,22 +1,12 @@
 [
   {
     "index": 0,
-    "name": "たけたけ",
-    "slug": "take-ta-ke-0"
+    "name": "上田　朋和",
+    "slug": "ueda-tomo-wa-0"
   },
   {
     "index": 1,
-    "name": "さたーにょ",
-    "slug": "sa-ta-ni-yo-1"
-  },
-  {
-    "index": 2,
-    "name": "石破茂",
-    "slug": "ishiba-shigeru-2"
-  },
-  {
-    "index": 3,
-    "name": "テスト太郎",
-    "slug": "tesuto-tar-3"
+    "name": "稲垣清也",
+    "slug": "inagaki-kiyoshi-1"
   }
 ]
