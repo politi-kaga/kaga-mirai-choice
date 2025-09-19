@@ -947,6 +947,19 @@ body {
     .footer {
         padding: 1.5rem 0;
     }
+    
+    /* タスク2: スマホ版政策比較ページの表示幅改善 */
+    .comparison-section {
+        width: 95% !important;
+        margin: 0 auto;
+        padding: 0 0.5rem;
+    }
+    
+    /* タスク3: スマホ版候補者一覧ページの写真サイズ拡大 */
+    .candidate-photo {
+        width: 120px !important;
+        height: 120px !important;
+    }
 }
 
 @media (min-width: 1024px) {

@@ -818,17 +818,35 @@ async function generateSite() {
     await fs.writeFile(path.join(config.distDir, 'candidates', 'index.html'), candidatesListHtml);
     console.log('👥 候補者一覧ページを生成しました');
     
-    // 候補者個別ページを生成（スラッグベース）
+    // 候補者個別ページを生成（スラッグベース）- 強化されたエラーハンドリング付き
+    let successfullyGenerated = 0;
     for (const mapping of slugMapping) {
-      // 候補者個別ディレクトリを作成（スラッグベース）
-      const candidateDir = path.join(config.distDir, 'candidates', mapping.slug);
-      await fs.ensureDir(candidateDir);
-      
-      // 候補者個別ページを生成
-      const candidateHtml = generateCandidateDetailHTML(mapping.candidate, mapping.index, mapping.slug);
-      await fs.writeFile(path.join(candidateDir, 'index.html'), candidateHtml);
-      
-      console.log(`👤 候補者${mapping.index + 1}の詳細ページを生成しました (/candidates/${mapping.slug}/)`);
+      try {
+        // 候補者個別ディレクトリを作成（スラッグベース）
+        const candidateDir = path.join(config.distDir, 'candidates', mapping.slug);
+        await fs.ensureDir(candidateDir);
+        
+        // 候補者個別ページを生成
+        const candidateHtml = generateCandidateDetailHTML(mapping.candidate, mapping.index, mapping.slug);
+        
+        // HTMLファイルの書き込み
+        const filePath = path.join(candidateDir, 'index.html');
+        await fs.writeFile(filePath, candidateHtml);
+        
+        // ファイル存在確認
+        const exists = await fs.pathExists(filePath);
+        if (!exists) {
+          throw new Error(`生成されたファイルが存在しません: ${filePath}`);
+        }
+        
+        const stats = await fs.stat(filePath);
+        console.log(`👤 候補者${mapping.index + 1}の詳細ページを生成しました (/candidates/${mapping.slug}/) - ファイルサイズ: ${stats.size}バイト`);
+        successfullyGenerated++;
+        
+      } catch (error) {
+        console.error(`❌ 候補者${mapping.index + 1} (${mapping.name}) の詳細ページ生成に失敗:`, error);
+        throw error; // 失敗時は処理を停止
+      }
     }
     
     console.log(`✅ 合計${slugMapping.length}個の候補者詳細ページを生成完了`);
