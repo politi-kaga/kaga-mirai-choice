@@ -969,6 +969,7 @@ body {
     
     /* main.containerの横marginを0に設定 */
     main.container {
+        width: 100%;
         margin-left: 0;
         margin-right: 0;
     }
