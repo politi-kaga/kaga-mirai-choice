@@ -89,7 +89,7 @@ body {
 .container {
     width: 90%;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0;
     padding: 0 1rem;
     /* メインコンテンツエリアが残りのスペースを占有 */
     flex-grow: 1;
