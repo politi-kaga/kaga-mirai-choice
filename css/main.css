@@ -967,6 +967,12 @@ body {
         overflow: visible;
     }
     
+    /* main.containerの横marginを0に設定 */
+    main.container {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
     /* タスク3: スマホ版候補者一覧ページの写真サイズ拡大 */
     .candidate-photo {
         width: 120px !important;
