@@ -643,7 +643,8 @@ body {
 }
 
 .question-content.active {
-    max-height: auto;
+    max-height: none;
+    overflow: visible;
     padding: 1rem;
 }
 
@@ -962,7 +963,8 @@ body {
     
     /* 質問コンテンツのスマホ表示調整 */
     .question-content.active {
-        max-height: auto;
+        max-height: none;
+        overflow: visible;
     }
     
     /* タスク3: スマホ版候補者一覧ページの写真サイズ拡大 */
