@@ -643,7 +643,7 @@ body {
 }
 
 .question-content.active {
-    max-height: 1000px;
+    max-height: auto;
     padding: 1rem;
 }
 
