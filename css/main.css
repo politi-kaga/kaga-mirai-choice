@@ -951,7 +951,7 @@ body {
     
     /* タスク2: スマホ版政策比較ページの表示幅改善 */
     .comparison-section {
-        width: 95% !important;
+        width: 100%;
         margin: 0 auto;
         padding: 0 0.5rem;
     }
