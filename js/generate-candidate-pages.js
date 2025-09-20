@@ -187,7 +187,7 @@ function generateCandidateDetailHTML(candidate, index) {
             <div class="nav-links">
                 <a href="../index.html">ホーム</a>
                 <a href="index.html">候補者一覧</a>
-                <a href="../comparison/index.html">政策比較</a>
+                <a href="../policy/index.html">政策比較</a>
             </div>
         </nav>
     </header>

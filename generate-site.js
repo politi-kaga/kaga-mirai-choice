@@ -99,7 +99,7 @@ function generateBaseHTML(title, description, canonicalUrl, content, isHomePage 
             <div class="nav-links">
                 <a href="${basePath}index.html">ホーム</a>
                 <a href="${basePath}candidates/index.html">候補者一覧</a>
-                <a href="${basePath}comparison/index.html">政策比較</a>
+                <a href="${basePath}policy/index.html">政策比較</a>
             </div>
         </nav>
     </header>
@@ -150,7 +150,7 @@ function generateHomeHTML() {
                 <h3>👥 候補者一覧</h3>
                 <p>立候補者の詳細情報と政策をご覧いただけます</p>
             </a>
-            <a href="comparison/index.html" class="quick-nav-item">
+            <a href="policy/index.html" class="quick-nav-item">
                 <h3>📊 政策比較</h3>
                 <p>各候補者の政策を分野別に比較できます</p>
             </a>
@@ -385,7 +385,7 @@ function generateComparisonHTML() {
             <p class="hero-subtitle">分野別に候補者の政策を比較できます</p>
         </section>
 
-        <div class="comparison-section">
+        <div class="policy-section">
             <div class="category-scroll-container">
                 <div class="category-tabs">
                     <div class="loading">カテゴリを読み込み中...</div>
@@ -398,17 +398,17 @@ function generateComparisonHTML() {
             </div>
         </div>`;
 
-  const pageSpecificJS = `<script src="../js/comparison.js"></script>`;
+  const pageSpecificJS = `<script src="../js/policy.js"></script>`;
 
   return generateBaseHTML(
     '政策比較 | 加賀みらいチョイス - 加賀市議会議員選挙2025',
     '2025年加賀市議会議員選挙候補者の政策を分野別に比較。各候補者の考えや政策を詳しく比較検討できます。',
-    'https://politi-kaga.github.io/kaga-mirai-choice/comparison/',
+    'https://politi-kaga.github.io/kaga-mirai-choice/policy/',
     content,
     false,     // isHomePage
     '',        // pageSpecificCSS
     pageSpecificJS,
-    1          // depth = 1 (comparison/ is 1 level deep)
+    1          // depth = 1 (policy/ is 1 level deep)
   );
 }
 
@@ -851,10 +851,10 @@ async function generateSite() {
     
     console.log(`✅ 合計${slugMapping.length}個の候補者詳細ページを生成完了`);
     
-    // comparison ディレクトリと政策比較ページを生成
-    await fs.ensureDir(path.join(config.distDir, 'comparison'));
-    const comparisonHtml = generateComparisonHTML();
-    await fs.writeFile(path.join(config.distDir, 'comparison', 'index.html'), comparisonHtml);
+    // policy ディレクトリと政策比較ページを生成
+    await fs.ensureDir(path.join(config.distDir, 'policy'));
+    const policyHtml = generateComparisonHTML();
+    await fs.writeFile(path.join(config.distDir, 'policy', 'index.html'), policyHtml);
     console.log('📊 政策比較ページを生成しました');
     
     console.log('✅ 静的サイト生成が完了しました！');
