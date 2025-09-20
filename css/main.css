@@ -955,6 +955,11 @@ body {
         padding: 0 0.5rem;
     }
     
+    /* 候補者詳細ページのスマホ表示幅調整 */
+    .candidate-detail {
+        width: 90%;
+    }
+    
     /* タスク3: スマホ版候補者一覧ページの写真サイズ拡大 */
     .candidate-photo {
         width: 120px !important;
