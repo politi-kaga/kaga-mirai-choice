@@ -960,6 +960,11 @@ body {
         width: 95%;
     }
     
+    /* 質問コンテンツのスマホ表示調整 */
+    .question-content.active {
+        max-height: auto;
+    }
+    
     /* タスク3: スマホ版候補者一覧ページの写真サイズ拡大 */
     .candidate-photo {
         width: 120px !important;
