@@ -95,6 +95,11 @@ body {
     flex-grow: 1;
 }
 
+main.container {
+    width: 100%;
+    max-width: none;
+}
+
 .hero {
     text-align: center;
     padding: 2rem 0;
