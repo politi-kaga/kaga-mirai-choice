@@ -147,6 +147,13 @@ main.container {
     margin-bottom: 1.5rem;
 }
 
+.hero-note {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+
 .hero-divider {
     display: none;
 }
