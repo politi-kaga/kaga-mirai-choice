@@ -892,6 +892,64 @@ main.container {
     color: #93c5fd;
 }
 
+.footer-share {
+    margin: 1.5rem 0;
+}
+
+.footer-share-text {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+}
+
+.footer-share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.footer-share-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.footer-share-button.twitter {
+    background: #1da1f2;
+    color: white;
+}
+
+.footer-share-button.twitter:hover {
+    background: #0d8bd9;
+    transform: translateY(-2px);
+}
+
+.footer-share-button.facebook {
+    background: #1877f2;
+    color: white;
+}
+
+.footer-share-button.facebook:hover {
+    background: #166fe5;
+    transform: translateY(-2px);
+}
+
+.footer-share-button.line {
+    background: #00b900;
+    color: white;
+}
+
+.footer-share-button.line:hover {
+    background: #009900;
+    transform: translateY(-2px);
+}
+
 /* レスポンシブデザイン */
 @media (max-width: 768px) {
     .header {
