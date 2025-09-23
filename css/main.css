@@ -950,6 +950,16 @@ main.container {
     transform: translateY(-2px);
 }
 
+.footer-share-button.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+}
+
+.footer-share-button.instagram:hover {
+    background: linear-gradient(45deg, #e08323 0%, #d6582c 25%, #cc1733 50%, #bc1356 75%, #ac0878 100%);
+    transform: translateY(-2px);
+}
+
 /* レスポンシブデザイン */
 @media (max-width: 768px) {
     .header {
