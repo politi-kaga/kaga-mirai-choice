@@ -552,46 +552,8 @@ async function initializeKuroshiro() {
 
 // 日本語名をURLスラッグに変換する関数
 async function generateSlug(name, fallbackIndex = 0) {
-  if (!name || typeof name !== 'string') {
-    return `candidate-${fallbackIndex}`;
-  }
-
-  let slug = '';
-  
-  // kuroshiroが利用可能な場合はローマ字変換を試行
-  try {
-    if (kuroshiro) {
-      const romanji = await kuroshiro.convert(name, {
-        to: 'romaji',
-        mode: 'spaced'
-      });
-      slug = romanji
-        .toLowerCase()
-        .replace(/[^\w\s-]/g, '') // 英数字、スペース、ハイフン以外を削除
-        .replace(/\s+/g, '-')     // スペースをハイフンに置換
-        .replace(/-+/g, '-')      // 連続するハイフンを一つに
-        .trim()
-        .replace(/^-+|-+$/g, ''); // 先頭・末尾のハイフンを削除
-    }
-  } catch (error) {
-    console.warn(`⚠️ Romanization failed for "${name}":`, error.message);
-  }
-
-  // ローマ字変換に失敗した場合のフォールバック処理
-  if (!slug || slug.length < 2) {
-    // 手動でよくある日本語名をローマ字に変換
-    slug = convertNameToRomaji(name);
-  }
-
-  // それでもうまくいかない場合の最終フォールバック
-  if (!slug || slug.length < 2) {
-    slug = `candidate-${fallbackIndex}`;
-  } else {
-    // 重複を避けるため、インデックスも含める
-    slug = `${slug}-${fallbackIndex}`;
-  }
-
-  return slug;
+  // 数字のみのslugを返す
+  return fallbackIndex.toString();
 }
 
 // 日本語名を手動でローマ字に変換する関数（よくある名前のマッピング）
