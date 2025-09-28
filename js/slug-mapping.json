@@ -2,17 +2,17 @@
   {
     "index": 0,
     "name": "上田　朋和",
-    "slug": "ueda-tomokazu-0"
+    "slug": "ueda-tomo-wa-0"
   },
   {
     "index": 1,
-    "name": "稲垣清也",
-    "slug": "inagaki-shinya-1"
+    "name": "稲垣　清也",
+    "slug": "inagaki-kiyoshi-1"
   },
   {
     "index": 2,
-    "name": "一色眞一",
-    "slug": "isshiki-shinichi-2"
+    "name": "一色　眞一",
+    "slug": "isshoku-shinichi-2"
   },
   {
     "index": 3,
@@ -27,11 +27,81 @@
   {
     "index": 5,
     "name": "東野　真樹",
-    "slug": "higashino-masaki-5"
+    "slug": "tno-maki-5"
   },
   {
     "index": 6,
     "name": "若林　高",
-    "slug": "wakabayashi-koh-6"
+    "slug": "wakabayashi-k-6"
+  },
+  {
+    "index": 7,
+    "name": "髙橋　菜見子",
+    "slug": "ky-sai-mi-ko-7"
+  },
+  {
+    "index": 8,
+    "name": "林　茂信",
+    "slug": "hayashi-shigenobu-8"
+  },
+  {
+    "index": 9,
+    "name": "山口　忠志",
+    "slug": "yamaguchi-tadashi-9"
+  },
+  {
+    "index": 10,
+    "name": "林　直史",
+    "slug": "hayashi-naofumi-10"
+  },
+  {
+    "index": 11,
+    "name": "川下　勉",
+    "slug": "kawashimo-tsutomu-11"
+  },
+  {
+    "index": 12,
+    "name": "前田　正",
+    "slug": "maeda-tadashi-12"
+  },
+  {
+    "index": 13,
+    "name": "辰川　志郎",
+    "slug": "tatsu-gawa-shir-13"
+  },
+  {
+    "index": 14,
+    "name": "中谷　喜英",
+    "slug": "nakatani-yoshihide-14"
+  },
+  {
+    "index": 15,
+    "name": "植木　陽祐",
+    "slug": "ueki-hi-y-15"
+  },
+  {
+    "index": 16,
+    "name": "荒谷　啓一",
+    "slug": "araya-keiichi-16"
+  },
+  {
+    "index": 17,
+    "name": "林　俊昭",
+    "slug": "hayashi-toshiaki-17"
+  },
+  {
+    "index": 18,
+    "name": "南出　貞子",
+    "slug": "minamide-sadako-18"
+  },
+  {
+    "index": 19,
+    "name": "中川　敬雄",
+    "slug": "nakagawa-kei-y-19"
+  },
+  {
+    "index": 20,
+    "name": "辻　裕行",
+    "slug": "tsuji-hiroyuki-20"
   }
 ]
